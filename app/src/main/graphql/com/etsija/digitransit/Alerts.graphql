@@ -1,0 +1,7 @@
+query Alerts {
+    alerts {
+        alertDescriptionText
+        alertSeverityLevel
+        effectiveStartDate
+    }
+}

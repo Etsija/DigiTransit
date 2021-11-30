@@ -1,0 +1,13 @@
+query StopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {
+    stopsByRadius(lat: $lat, lon: $lon, radius: $radius) {
+        edges {
+            node {
+                stop {
+                    gtfsId
+                    name
+                }
+                distance
+            }
+        }
+    }
+}
