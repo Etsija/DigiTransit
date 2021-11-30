@@ -5,6 +5,10 @@ plugins {
     id 'kotlin-kapt'
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     compileSdk 31
 

@@ -7,7 +7,7 @@ import com.etsija.digitransit.model.Alert
 import com.etsija.digitransit.network.ApolloInstance
 
 class SharedRepository {
-    
+
     suspend fun getAlerts(): List<Alert> {
         val response = ApolloInstance.apollo
             .query(AlertsQuery())
