@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
+    app:strokeWidth="1dp"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="Alkaa:"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintStart_toEndOf="@+id/tvSeverity"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="Päättyy:"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvEnd"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvStopId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvSeverity"
+            app:layout_constraintTop_toBottomOf="@+id/lblStart"
+            tools:text="Tapiolan Helmakujan ylätaso suljettu ke 1.12. klo 9-18. Käytä Itätuulenkujalle alatasoa eli ovia suoraan bussiterminaalista ulos. HSL.fi/helmakuja" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStopId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvStopName"
+            app:layout_constraintStart_toEndOf="@+id/tvSeverity"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            tools:text="HSL:2211217" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvStopId"
+            tools:text="Tapiola (M)" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvZoneId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="B" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSeverity"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/lblStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/cardview_dark_background" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblStart"
+            app:layout_constraintStart_toEndOf="@+id/lblStart"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="24.12.2021" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1.1.2022" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -52,10 +52,6 @@ class MainActivity : AppCompatActivity() {
             findViewById<BottomNavigationView>(R.id.bottomNavigation),
             navHostFragment.navController
         )
-
-        viewModel.alerts.observe(this, Observer { alert ->
-            Log.d("Response", alert.toString())
-        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
