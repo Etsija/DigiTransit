@@ -15,11 +15,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.FragmentAlertsBinding
 import com.etsija.digitransit.databinding.FragmentStopsBinding
+import com.etsija.digitransit.model.Alert
 import com.etsija.digitransit.viewmodel.LocationViewModel
 import com.etsija.digitransit.viewmodel.SharedViewModel
 import java.util.jar.Manifest
 
-class StopsFragment : Fragment() {
+class StopsFragment : BaseFragment() {
 
     private var _binding: FragmentStopsBinding? = null
     private val binding get() = _binding!!
@@ -60,9 +61,12 @@ class StopsFragment : Fragment() {
     // Get the current location
     private fun requestLocationUpdates() {
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
-            Log.d("Location", it.toString())
             binding.txtLat.text = it.latitude
             binding.txtLon.text = it.longitude
+
+            sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
+                Log.d("Stops near this location", stops.toString())
+            })
         })
     }
 

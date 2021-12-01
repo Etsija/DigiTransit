@@ -1,0 +1,18 @@
+package com.etsija.digitransit.mapper
+
+import com.etsija.digitransit.AlertsQuery
+import com.etsija.digitransit.StopsByRadiusQuery
+import com.etsija.digitransit.model.Alert
+import com.etsija.digitransit.model.Stop
+import com.etsija.digitransit.utils.Helpers
+
+object StopMapper {
+
+    fun buildFrom(response: StopsByRadiusQuery.Edge): Stop {
+        return Stop(
+            response.node?.stop!!.gtfsId,
+            response.node?.stop!!.name,
+            response.node?.distance!!
+        )
+    }
+    }
