@@ -75,4 +75,7 @@ dependencies {
 
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+
+    // Locationing
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 }
