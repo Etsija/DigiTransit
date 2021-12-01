@@ -2,6 +2,8 @@ package com.etsija.digitransit.view.epoxy
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
@@ -55,9 +57,31 @@ class AlertEpoxyController(): EpoxyController() {
 
         override fun ModelAlertBinding.bind() {
             tvStart.text = alert.effectiveStartDate
-            // todo enddate
+            tvEnd.text = alert.effectiveEndDate
             tvDescription.text = alert.description
-            // todo stop id, name, zone
+
+            // Stop information is nullable i.e. an alert doesn't necessarily
+            // include stop data
+            if (alert.stopId == null) {
+                tvStopId.isGone = true
+            } else {
+                tvStopId.isVisible = true
+                tvStopId.text = alert.stopId
+            }
+
+            if (alert.stopName == null) {
+                tvStopName.isGone = true
+            } else {
+                tvStopName.isVisible = true
+                tvStopName.text = alert.stopName
+            }
+
+            if (alert.zoneId == null) {
+                tvZoneId.isGone = true
+            } else {
+                tvZoneId.isVisible = true
+                tvZoneId.text = alert.zoneId
+            }
 
             // Set info card color based on alert severity
             val color = when (alert.severity) {

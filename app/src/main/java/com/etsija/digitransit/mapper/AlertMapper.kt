@@ -10,7 +10,11 @@ object AlertMapper {
         return Alert(
             response.alertDescriptionText,
             response.alertSeverityLevel.toString(),
-            getDateTime(response.effectiveStartDate.toString())
+            getDateTime(response.effectiveStartDate.toString()),
+            getDateTime(response.effectiveEndDate.toString()),
+            response.stop?.gtfsId,
+            response.stop?.name,
+            response.stop?.zoneId
         )
     }
 }
