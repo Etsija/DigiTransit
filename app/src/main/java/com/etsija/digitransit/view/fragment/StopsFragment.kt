@@ -18,6 +18,7 @@ import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.model.Alert
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants
+import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.StopEpoxyController
 import com.etsija.digitransit.viewmodel.LocationViewModel
 import com.etsija.digitransit.viewmodel.SharedViewModel
@@ -77,8 +78,10 @@ class StopsFragment : BaseFragment() {
             Log.d("Location:", it.latitude.toString() + ":" + it.longitude.toString())
 
             // Get nearby stops
-            sharedViewModel.getStops(it.latitude.toDouble(), it.longitude.toDouble(), Constants.Companion.RADIUS)
-
+            sharedViewModel.getStops(
+                it.latitude.toDouble(),
+                it.longitude.toDouble(),
+                prefs.searchRadius)
         })
     }
 

@@ -1,14 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.SettingsFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lblLocationing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Locationing"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lblPolling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Polling"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lblLocInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Locationing interval (s)"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblLocationing"
+        app:layout_constraintTop_toBottomOf="@+id/lblLocationing" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lblRadius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Stops search radius (m)"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblLocationing"
+        app:layout_constraintTop_toBottomOf="@+id/lblPolling" />
+
+    <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLocInterval" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/etLocInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:inputType="number"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblLocInterval"
+        app:layout_constraintStart_toEndOf="@+id/lblLocInterval"
+        app:layout_constraintTop_toTopOf="@+id/lblLocInterval" />
+
+    <EditText
+        android:id="@+id/etRadius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:inputType="number"
+        android:text="250"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblRadius"
+        app:layout_constraintStart_toEndOf="@+id/lblRadius"
+        app:layout_constraintTop_toTopOf="@+id/lblRadius" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lblStopsInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Stops search interval (s)"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblPolling"
+        app:layout_constraintTop_toBottomOf="@+id/etRadius" />
+
+    <EditText
+        android:id="@+id/etStopsInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:inputType="number"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblStopsInterval"
+        app:layout_constraintStart_toEndOf="@+id/lblStopsInterval"
+        app:layout_constraintTop_toTopOf="@+id/lblStopsInterval" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lblArrivalInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Next arrivals search interval (s)"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblPolling"
+        app:layout_constraintTop_toBottomOf="@+id/etStopsInterval" />
+
+    <EditText
+        android:id="@+id/etArrivalInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:inputType="number"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblArrivalInterval"
+        app:layout_constraintStart_toEndOf="@+id/lblArrivalInterval"
+        app:layout_constraintTop_toTopOf="@+id/lblArrivalInterval" />
+
+    <Button
+        android:id="@+id/btnSavePreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etArrivalInterval" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
