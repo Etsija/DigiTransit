@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
         // Define top-level fragments
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.alertsFragment,
-            R.id.stopsFragment
+            R.id.stopsFragment,
+            R.id.settingsFragment
         ))
 
         // Setup top app bar

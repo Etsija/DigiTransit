@@ -16,4 +16,11 @@
         android:title="Traffic Alerts"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:orderInCategory="3"
+        android:title="Settings"
+        app:showAsAction="always" />
+
 </menu>

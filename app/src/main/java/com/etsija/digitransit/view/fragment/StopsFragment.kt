@@ -16,6 +16,9 @@ import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.FragmentAlertsBinding
 import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.model.Alert
+import com.etsija.digitransit.model.Stop
+import com.etsija.digitransit.utils.Constants
+import com.etsija.digitransit.view.epoxy.StopEpoxyController
 import com.etsija.digitransit.viewmodel.LocationViewModel
 import com.etsija.digitransit.viewmodel.SharedViewModel
 import java.util.jar.Manifest
@@ -25,6 +28,7 @@ class StopsFragment : BaseFragment() {
     private var _binding: FragmentStopsBinding? = null
     private val binding get() = _binding!!
     private val LOCATION_PERMISSION_REQUEST = 2000
+    private val controller = StopEpoxyController()
 
     // ViewModel for this activity's lifecycle
     val locationViewModel: LocationViewModel by lazy {
@@ -43,7 +47,14 @@ class StopsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ervStops.setController(controller)
         prepRequestLocationUpdates()
+
+        sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
+            Log.d("Stops near this location", stops.toString())
+            controller.stops = stops as ArrayList<Stop>
+        })
+
     }
 
     // Request permission for the location updates
@@ -63,10 +74,11 @@ class StopsFragment : BaseFragment() {
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
             binding.txtLat.text = it.latitude
             binding.txtLon.text = it.longitude
+            Log.d("Location:", it.latitude.toString() + ":" + it.longitude.toString())
 
-            sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
-                Log.d("Stops near this location", stops.toString())
-            })
+            // Get nearby stops
+            sharedViewModel.getStops(it.latitude.toDouble(), it.longitude.toDouble(), Constants.Companion.RADIUS)
+
         })
     }
 
@@ -79,6 +91,7 @@ class StopsFragment : BaseFragment() {
         when (requestCode) {
             LOCATION_PERMISSION_REQUEST -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("StopsFragment", "Enter requestLocationUpdates()")
                     requestLocationUpdates()
                 } else {
                     Toast.makeText(context, "Unable to find location without permission", Toast.LENGTH_SHORT).show()

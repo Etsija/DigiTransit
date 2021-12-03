@@ -92,7 +92,6 @@ class AlertEpoxyController(): EpoxyController() {
             tvSeverity.setBackgroundColor(color)
             root.setStrokeColor(ColorStateList.valueOf(color))
         }
-
     }
 
     // Handle loading state

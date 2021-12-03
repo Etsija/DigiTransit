@@ -3,7 +3,8 @@ package com.etsija.digitransit.model
 data class Stop(
     val gtfsId: String = "",
     val stopName: String = "",
-    val distance: Int?
+    val distance: Int?,
+    val type: String?
 ) {
 
 }

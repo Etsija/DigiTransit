@@ -5,6 +5,7 @@ query StopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {
                 stop {
                     gtfsId
                     name
+                    vehicleType
                 }
                 distance
             }

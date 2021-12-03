@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id("com.apollographql.apollo").version("2.5.11")
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 kapt {
@@ -78,4 +80,9 @@ dependencies {
 
     // Locationing
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    // Firebase Crashlytics
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
