@@ -12,24 +12,30 @@ import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.requestLocationUpdates
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.FragmentAlertsBinding
 import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.model.Alert
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants
+import com.etsija.digitransit.utils.Constants.Companion.ONE_SECOND
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.StopEpoxyController
 import com.etsija.digitransit.viewmodel.LocationViewModel
 import com.etsija.digitransit.viewmodel.SharedViewModel
+import kotlinx.coroutines.*
 import java.util.jar.Manifest
 
 class StopsFragment : BaseFragment() {
 
+    private var LOG = "StopsFragment"
     private var _binding: FragmentStopsBinding? = null
     private val binding get() = _binding!!
     private val LOCATION_PERMISSION_REQUEST = 2000
     private val controller = StopEpoxyController()
+    private var latitude: String = "60.2068726"
+    private var longitude: String = "24.8939462"
 
     // ViewModel for this activity's lifecycle
     val locationViewModel: LocationViewModel by lazy {
@@ -51,8 +57,22 @@ class StopsFragment : BaseFragment() {
         binding.ervStops.setController(controller)
         prepRequestLocationUpdates()
 
+        // Launch a coroutine to poll nearby stops
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                while (true) {
+                    sharedViewModel.pollStops(
+                        prefs.lastLat!!.toDouble(),
+                        prefs.lastLon!!.toDouble(),
+                        prefs.searchRadius
+                    )
+                    delay(prefs.stopsSearchInterval * ONE_SECOND)
+                }
+            }
+        }
+
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
-            Log.d("Stops near this location", stops.toString())
+            Log.d(LOG, stops.toString())
             controller.stops = stops as ArrayList<Stop>
         })
 
@@ -73,15 +93,12 @@ class StopsFragment : BaseFragment() {
     // Get the current location
     private fun requestLocationUpdates() {
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
-            binding.txtLat.text = it.latitude
-            binding.txtLon.text = it.longitude
-            Log.d("Location:", it.latitude.toString() + ":" + it.longitude.toString())
+            prefs.lastLat = it.latitude
+            prefs.lastLon = it.longitude
 
-            // Get nearby stops
-            sharedViewModel.getStops(
-                it.latitude.toDouble(),
-                it.longitude.toDouble(),
-                prefs.searchRadius)
+            binding.txtLat.text = prefs.lastLat
+            binding.txtLon.text = prefs.lastLon
+            Log.d(LOG, prefs.lastLat + ":" + prefs.lastLon)
         })
     }
 
@@ -105,6 +122,9 @@ class StopsFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        lifecycleScope.cancel()
         _binding = null
     }
+
+
 }

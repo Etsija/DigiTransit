@@ -2,6 +2,7 @@ package com.etsija.digitransit.view.epoxy
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.util.Log
 import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
@@ -28,12 +29,12 @@ class StopEpoxyController(): EpoxyController() {
     override fun buildModels() {
 
         if (isLoading) {
-            StopEpoxyController.LoadingEpoxyModel().id("loading_state").addTo(this)
+            LoadingEpoxyModel().id("loading_state").addTo(this)
             return
         }
 
         if (stops.isEmpty()) {
-            StopEpoxyController.EmptyStateEpoxyModel().id("stop_empty_state")
+            EmptyStateEpoxyModel().id("stop_empty_state").addTo(this)
             return
         }
 
@@ -41,7 +42,7 @@ class StopEpoxyController(): EpoxyController() {
         stops.sortedBy {
             it.distance
         }.forEach { stop ->
-            StopEpoxyController.StopEpoxyModel(stop).id(stop.gtfsId).addTo(this)
+            StopEpoxyModel(stop).id("stop").addTo(this)
         }
     }
 

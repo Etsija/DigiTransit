@@ -38,7 +38,7 @@ class AlertEpoxyController(): EpoxyController() {
         }
 
         if (alerts.isEmpty()) {
-            EmptyStateEpoxyModel().id("alert_empty_state")
+            EmptyStateEpoxyModel().id("alert_empty_state").addTo(this)
             return
         }
 

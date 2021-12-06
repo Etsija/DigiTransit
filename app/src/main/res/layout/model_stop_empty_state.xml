@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Ei pysäkkejä lähietäisyydellä"
         android:textAllCaps="true"
-        android:textSize="32sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"

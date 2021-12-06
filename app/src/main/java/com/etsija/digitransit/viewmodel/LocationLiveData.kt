@@ -44,7 +44,6 @@ class LocationLiveData(context: Context): LiveData<LocationDTO>() {
             for (location in locationResult.locations) {
                 setLocationData(location)
             }
-
         }
     }
 
@@ -61,8 +60,8 @@ class LocationLiveData(context: Context): LiveData<LocationDTO>() {
 
     companion object {
         val locationRequest: LocationRequest = LocationRequest.create().apply {
-            interval = ONE_SECOND* prefs.locInterval
-            fastestInterval = interval/4
+            interval = ONE_SECOND * prefs.locInterval
+            fastestInterval = interval / 4
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }

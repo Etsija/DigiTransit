@@ -23,4 +23,13 @@ class Prefs (context: Context)
     var arrivalsSearchInterval: Int
         get() = preferences.getInt("ARRIVALS_SEARCH_INTERVAL", 10)
         set(value) = preferences.edit().putInt("ARRIVALS_SEARCH_INTERVAL", value).apply()
+
+    var lastLat: String?
+        get() = preferences.getString("LAST_LAT", "60.2068726")
+        set(value) = preferences.edit().putString("LAST_LAT", value).apply()
+
+    var lastLon: String?
+        get() = preferences.getString("LAST_LON", "60.2068726")
+        set(value) = preferences.edit().putString("LAST_LON", value).apply()
+
 }
