@@ -1,11 +1,7 @@
 package com.etsija.digitransit.mapper
 
-import android.graphics.Color
-import com.etsija.digitransit.AlertsQuery
 import com.etsija.digitransit.StopsByRadiusQuery
-import com.etsija.digitransit.model.Alert
 import com.etsija.digitransit.model.Stop
-import com.etsija.digitransit.utils.Helpers
 
 object StopMapper {
 
@@ -21,10 +17,12 @@ object StopMapper {
         }
 
         return Stop(
-            response.node?.stop!!.gtfsId,
-            response.node?.stop!!.name,
-            response.node?.distance!!,
+            response.node.stop.gtfsId,
+            response.node.stop.name,
+            response.node.stop.code!!,
+            response.node.distance!!,
             vehicleTypeAsString
         )
     }
+
     }

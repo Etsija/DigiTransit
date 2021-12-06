@@ -3,6 +3,7 @@ package com.etsija.digitransit.view.epoxy
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.Log
+import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
@@ -42,7 +43,7 @@ class StopEpoxyController(): EpoxyController() {
         stops.sortedBy {
             it.distance
         }.forEach { stop ->
-            StopEpoxyModel(stop).id("stop").addTo(this)
+            StopEpoxyModel(stop).id(stop.gtfsId).addTo(this)
         }
     }
 
@@ -53,7 +54,7 @@ class StopEpoxyController(): EpoxyController() {
 
         override fun ModelStopBinding.bind() {
             tvName.text = stop.stopName
-            tvId.text = stop.gtfsId
+            tvId.text = stop.stopCode
             tvDistance.text = stop.distance.toString()
 
             // Set info card label based on type of the stop

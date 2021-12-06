@@ -52,22 +52,14 @@ class SharedViewModel(): ViewModel() {
     // Get the stops once every time this function is run
     fun getStops(lat: Double, lon: Double, radius: Int) {
         viewModelScope.launch {
-            try {
-                val response = repository.getStops(lat, lon, radius)
-                _stops.postValue(response)
-            } catch (ae: ApolloException) {
-                Log.d("ApolloException", "failure", ae)
-            }
+            val response = repository.getStops(lat, lon, radius)
+            _stops.postValue(response)
         }
     }
 
     // Should be called from a coroutinescope in UI layer!
     suspend fun pollStops(lat: Double, lon: Double, radius: Int) {
-        try {
-            val response = repository.getStops(lat, lon, radius)
-            _stops.postValue(response)
-        } catch (ae: ApolloException) {
-            Log.d("ApolloException", "failure", ae)
-        }
+        val response = repository.getStops(lat, lon, radius)
+        _stops.postValue(response)
     }
 }
