@@ -15,6 +15,8 @@ import com.etsija.digitransit.model.Pattern
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Helpers
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
+import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
+import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 import com.etsija.digitransit.utils.Helpers.Companion.tidyPatternName
 
 class DeparturesFragment : BaseFragment() {
@@ -45,23 +47,11 @@ class DeparturesFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set info card label based on type of the stop
-        val text = when (selectedStop?.type) {
-            "TRAM" -> "R"
-            "METRO" -> "M"
-            "RAIL" -> "J"
-            "BUS" -> "B"
-            else -> ""
-        }
+        val text = setCardSymbol(selectedStop?.type!!)
         binding.tvType.text = text
 
         // Set info card color based on type of the stop
-        val color = when (selectedStop?.type) {
-            "TRAM" -> Color.parseColor("#008351")   // RAL 6024 Traffic Green, HKL Raitiovaunu
-            "METRO" -> Color.parseColor("#F67828")  // RAL 2003 Pastel Orange, HKL Metro
-            "RAIL" -> Color.parseColor("#844C82")   // RAL 4008 Signal Violet, HSL Lähijuna
-            "BUS" -> Color.parseColor("#2271B3")    // RAL 5015 Sky Blue, HSL Bussi
-            else -> Color.DKGRAY
-        }
+        val color = setCardColor(selectedStop?.type!!)
         binding.tvType.setBackgroundColor(color)
         binding.root.setStrokeColor(ColorStateList.valueOf(color))
 
@@ -74,7 +64,7 @@ class DeparturesFragment : BaseFragment() {
         val justNames = selectedStop?.patterns
             ?.map { pattern ->
                 pattern?.name
-            }?.joinToString(separator = "\n\n")
+            }?.joinToString(separator = "\n")
         binding.tvPatterns.text = justNames
     }
 

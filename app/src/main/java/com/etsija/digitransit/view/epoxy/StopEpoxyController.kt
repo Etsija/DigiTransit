@@ -9,6 +9,8 @@ import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
+import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
+import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 
 class StopEpoxyController(
     private val stopInterface: StopInterface
@@ -65,23 +67,11 @@ class StopEpoxyController(
             tvPatternNumbers.text = getPatternNumbers(stop.patterns)
 
             // Set info card label based on type of the stop
-            val text = when (stop.type) {
-                "TRAM" -> "R"
-                "METRO" -> "M"
-                "RAIL" -> "J"
-                "BUS" -> "B"
-                else -> ""
-            }
+            val text = setCardSymbol(stop.type!!)
             tvType.text = text
 
             // Set info card color based on type of the stop
-            val color = when (stop.type) {
-                "TRAM" -> Color.parseColor("#008351")   // RAL 6024 Traffic Green, HKL Raitiovaunu
-                "METRO" -> Color.parseColor("#F67828")  // RAL 2003 Pastel Orange, HKL Metro
-                "RAIL" -> Color.parseColor("#844C82")   // RAL 4008 Signal Violet, HSL Lähijuna
-                "BUS" -> Color.parseColor("#2271B3")    // RAL 5015 Sky Blue, HSL Bussi
-                else -> Color.DKGRAY
-            }
+            val color = setCardColor(stop.type)
             tvType.setBackgroundColor(color)
             root.setStrokeColor(ColorStateList.valueOf(color))
 
