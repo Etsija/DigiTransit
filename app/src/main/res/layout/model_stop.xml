@@ -18,33 +18,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/tvType"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Korppaanmäki" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPatternNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@+id/tvType"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="34, 45, 56" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:text="Distance:"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvType"
-            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPatternNumbers" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Distance:"
+            app:layout_constraintBottom_toBottomOf="@+id/lblDistance"
             app:layout_constraintStart_toEndOf="@+id/lblDistance"
-            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            app:layout_constraintTop_toTopOf="@+id/lblDistance"
             tools:text="340" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -63,14 +73,14 @@
             tools:text="R" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvId"
+            android:id="@+id/tvCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="HSL:1276453" />
+            tools:text="H0123" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

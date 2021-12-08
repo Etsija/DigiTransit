@@ -21,6 +21,7 @@ object StopMapper {
             response.node.stop.gtfsId,
             response.node.stop.name,
             response.node.stop.code!!,
+            response.node.stop.zoneId!!,
             response.node.distance!!,
             PatternMapper.buildFrom(response.node),
             vehicleTypeAsString

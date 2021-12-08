@@ -8,6 +8,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
 import com.etsija.digitransit.model.Stop
+import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
 
 class StopEpoxyController(
     private val stopInterface: StopInterface
@@ -59,8 +60,9 @@ class StopEpoxyController(
 
         override fun ModelStopBinding.bind() {
             tvName.text = stop.stopName
-            tvId.text = stop.stopCode
+            tvCode.text = stop.stopCode
             tvDistance.text = stop.distance.toString()
+            tvPatternNumbers.text = getPatternNumbers(stop.patterns)
 
             // Set info card label based on type of the stop
             val text = when (stop.type) {
