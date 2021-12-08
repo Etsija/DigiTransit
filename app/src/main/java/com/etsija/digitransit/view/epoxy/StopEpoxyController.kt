@@ -61,7 +61,7 @@ class StopEpoxyController(
     ): ViewBindingKotlinModel<ModelStopBinding>(R.layout.model_stop) {
 
         override fun ModelStopBinding.bind() {
-            tvName.text = stop.stopName
+            tvStopNameInStops.text = stop.stopName
             tvCode.text = stop.stopCode
             tvDistance.text = stop.distance.toString()
             tvPatternNumbers.text = getPatternNumbers(stop.patterns)

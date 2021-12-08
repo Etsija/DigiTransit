@@ -14,63 +14,38 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvStopNameInStops"
+            android:id="@+id/tvStopNameInDepartures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvType"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Korppaanmäki" />
+            tools:text="~05:54" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPatternNumbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toEndOf="@+id/tvType"
-            app:layout_constraintTop_toBottomOf="@+id/tvStopNameInStops"
-            tools:text="34, 45, 56" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblPatterns"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:text="Distance:"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvType"
-            app:layout_constraintTop_toBottomOf="@+id/tvPatternNumbers" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStopNameInDepartures"
+            tools:text="Kirurgi via Ruskeasuo" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvDistance"
+            android:id="@+id/tvRoute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/lblPatterns"
-            app:layout_constraintStart_toEndOf="@+id/lblPatterns"
-            app:layout_constraintTop_toTopOf="@+id/lblPatterns"
-            tools:text="340" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvType"
-            android:layout_width="30dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvStopNameInStops"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/cardview_dark_background"
-            tools:text="R" />
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCode"
+            tools:text="10H" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCode"
@@ -80,7 +55,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="H0123" />
+            tools:text="21.12.2021" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -7,6 +7,7 @@ import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
 import com.etsija.digitransit.AlertsQuery
+import com.etsija.digitransit.StopArrDepQuery
 import com.etsija.digitransit.StopsByRadiusQuery
 import com.etsija.digitransit.utils.Constants.Companion.BASE_URL
 
@@ -24,6 +25,9 @@ object ApolloClient {
 
     fun getStops(lat: Double, lon: Double, radius: Int): ApolloQueryCall<StopsByRadiusQuery.Data> =
         apollo.query(StopsByRadiusQuery(lat, lon, radius))
+
+    fun getDepartures(gtfsId: String): ApolloQueryCall<StopArrDepQuery.Data> =
+        apollo.query(StopArrDepQuery(gtfsId))
 
     private inline fun <T> safeApiCall(apicall: () -> Response<T>): DigiTransitResponse<T> {
         return try {

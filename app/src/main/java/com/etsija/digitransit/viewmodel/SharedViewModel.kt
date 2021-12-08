@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo.exception.ApolloException
 import com.etsija.digitransit.AlertsQuery
 import com.etsija.digitransit.model.Alert
+import com.etsija.digitransit.model.Departure
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.repository.SharedRepository
 import com.etsija.digitransit.utils.Constants
@@ -29,6 +30,10 @@ class SharedViewModel(): ViewModel() {
     // Stops query response
     private val _stops = MutableLiveData<List<Stop>>()
     val stops: LiveData<List<Stop>> = _stops
+
+    // Departures query response
+    private val _departures = MutableLiveData<List<Departure>>()
+    val departures: LiveData<List<Departure>> = _departures
 
     private var isActive: Boolean = false
 
@@ -61,5 +66,11 @@ class SharedViewModel(): ViewModel() {
     suspend fun pollStops(lat: Double, lon: Double, radius: Int) {
         val response = repository.getStops(lat, lon, radius)
         _stops.postValue(response)
+    }
+
+    // Should be called from a coroutinescope in UI layer!
+    suspend fun pollDepartures(gtfsId: String) {
+        val response = repository.getDepartures(gtfsId)
+        _departures.postValue(response)
     }
 }

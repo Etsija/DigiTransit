@@ -8,22 +8,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.etsija.digitransit.databinding.FragmentDeparturesBinding
+import com.etsija.digitransit.model.Departure
 import com.etsija.digitransit.model.Pattern
 
 import com.etsija.digitransit.model.Stop
+import com.etsija.digitransit.utils.Constants
 import com.etsija.digitransit.utils.Helpers
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
 import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 import com.etsija.digitransit.utils.Helpers.Companion.tidyPatternName
+import com.etsija.digitransit.utils.prefs
+import com.etsija.digitransit.view.epoxy.DeparturesEpoxyController
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DeparturesFragment : BaseFragment() {
 
     private val LOG = "BaseFragment"
     private var _binding: FragmentDeparturesBinding? = null
     private val binding get() = _binding!!
+    private val controller = DeparturesEpoxyController()
     private lateinit var lvPatterns: ListView
 
     private val safeArgs: DeparturesFragmentArgs by navArgs()
@@ -53,10 +63,10 @@ class DeparturesFragment : BaseFragment() {
         // Set info card color based on type of the stop
         val color = setCardColor(selectedStop?.type!!)
         binding.tvType.setBackgroundColor(color)
-        binding.root.setStrokeColor(ColorStateList.valueOf(color))
+        binding.mcStopInfo.setStrokeColor(ColorStateList.valueOf(color))
 
         //binding.test.text = selectedStop?.patterns.toString()
-        binding.tvName.text = selectedStop?.stopName
+        binding.tvStopNameInDepartures.text = selectedStop?.stopName
         binding.tvCode.text = selectedStop?.stopCode
         binding.tvZone.text = selectedStop?.zoneId
 
@@ -66,6 +76,23 @@ class DeparturesFragment : BaseFragment() {
                 pattern?.name
             }?.joinToString(separator = "\n")
         binding.tvPatterns.text = justNames
+
+        // Launch a coroutine to poll next departures
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                while (true) {
+                    sharedViewModel.pollDepartures(
+                        selectedStop!!.gtfsId
+                    )
+                    delay(prefs.arrivalsSearchInterval * Constants.ONE_SECOND)
+                }
+            }
+        }
+
+        sharedViewModel.departures.observe(viewLifecycleOwner, { departures ->
+            Log.d(LOG, departures.toString())
+            controller.departures = departures as ArrayList<Departure>
+        })
     }
 
     override fun onDestroyView() {
