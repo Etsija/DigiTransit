@@ -9,15 +9,36 @@
         android:id="@+id/stopsFragment"
         android:name="com.etsija.digitransit.view.fragment.StopsFragment"
         android:label="Nearby Stops"
-        tools:layout="@layout/fragment_stops" />
+        tools:layout="@layout/fragment_stops" >
+        <action
+            android:id="@+id/action_stopsFragment_to_departuresFragment"
+            app:destination="@id/departuresFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/alertsFragment"
         android:name="com.etsija.digitransit.view.fragment.AlertsFragment"
         android:label="Traffic Alerts"
         tools:layout="@layout/fragment_alerts" />
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.etsija.digitransit.view.fragment.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/departuresFragment"
+        android:name="com.etsija.digitransit.view.fragment.DeparturesFragment"
+        android:label="Departures from this stop"
+        tools:layout="@layout/fragment_departures" >
+
+        <argument
+            android:name="selectedStopId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
+
 </navigation>

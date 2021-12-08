@@ -9,7 +9,9 @@ import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
 import com.etsija.digitransit.model.Stop
 
-class StopEpoxyController(): EpoxyController() {
+class StopEpoxyController(
+    private val stopInterface: StopInterface
+): EpoxyController() {
 
     var isLoading: Boolean = true
         set(value) {
@@ -43,13 +45,16 @@ class StopEpoxyController(): EpoxyController() {
         stops.sortedBy {
             it.distance
         }.forEach { stop ->
-            StopEpoxyModel(stop).id(stop.gtfsId).addTo(this)
+            StopEpoxyModel(stop, stopInterface)
+                .id(stop.id)
+                .addTo(this)
         }
     }
 
     // This is the Epoxy model for one stop in the list
     data class StopEpoxyModel(
-        val stop: Stop
+        val stop: Stop,
+        val stopInterface: StopInterface
     ): ViewBindingKotlinModel<ModelStopBinding>(R.layout.model_stop) {
 
         override fun ModelStopBinding.bind() {
@@ -77,6 +82,10 @@ class StopEpoxyController(): EpoxyController() {
             }
             tvType.setBackgroundColor(color)
             root.setStrokeColor(ColorStateList.valueOf(color))
+
+            root.setOnClickListener {
+                stopInterface.onStopSelected(stop)
+            }
         }
     }
 
@@ -85,7 +94,7 @@ class StopEpoxyController(): EpoxyController() {
         ViewBindingKotlinModel<ModelLoadingStateBinding>(R.layout.model_loading_state) {
 
         override fun ModelLoadingStateBinding.bind() {
-            // todo
+            // nothing to do
         }
     }
 

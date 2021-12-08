@@ -3,6 +3,7 @@ query StopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {
         edges {
             node {
                 stop {
+                    id
                     gtfsId
                     name
                     code

@@ -13,6 +13,7 @@ import androidx.core.location.LocationManagerCompat.requestLocationUpdates
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.FragmentAlertsBinding
 import com.etsija.digitransit.databinding.FragmentStopsBinding
@@ -22,18 +23,19 @@ import com.etsija.digitransit.utils.Constants
 import com.etsija.digitransit.utils.Constants.Companion.ONE_SECOND
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.StopEpoxyController
+import com.etsija.digitransit.view.epoxy.StopInterface
 import com.etsija.digitransit.viewmodel.LocationViewModel
 import com.etsija.digitransit.viewmodel.SharedViewModel
 import kotlinx.coroutines.*
 import java.util.jar.Manifest
 
-class StopsFragment : BaseFragment() {
+class StopsFragment : BaseFragment(), StopInterface {
 
-    private var LOG = "StopsFragment"
+    private val LOG = "StopsFragment"
     private var _binding: FragmentStopsBinding? = null
     private val binding get() = _binding!!
     private val LOCATION_PERMISSION_REQUEST = 2000
-    private val controller = StopEpoxyController()
+    private val controller = StopEpoxyController(this)
     private var latitude: String = "60.2068726"
     private var longitude: String = "24.8939462"
 
@@ -120,11 +122,15 @@ class StopsFragment : BaseFragment() {
         }
     }
 
+    override fun onStopSelected(stop: Stop) {
+        val navDirections = StopsFragmentDirections
+            .actionStopsFragmentToDeparturesFragment(stop.gtfsId)
+        navigateViaNavGraph(navDirections)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         lifecycleScope.cancel()
         _binding = null
     }
-
-
 }
