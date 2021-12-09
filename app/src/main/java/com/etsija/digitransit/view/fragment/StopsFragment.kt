@@ -59,6 +59,7 @@ class StopsFragment : BaseFragment(), StopInterface {
                         prefs.lastLon!!.toDouble(),
                         prefs.searchRadius
                     )
+                    // Testing Oulu
                     //sharedViewModel.pollStops(65.0156201, 25.4697043, 500)
                     delay(prefs.stopsSearchInterval * ONE_SECOND)
                 }

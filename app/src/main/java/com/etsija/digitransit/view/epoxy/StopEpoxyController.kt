@@ -65,9 +65,14 @@ class StopEpoxyController(
             tvCode.text = stop.stopCode ?: stop.gtfsId
             tvDistance.text = stop.distance.toString()
 
-            //tvPatternNumbers.text = getPatternNumbers(stop.patterns)
-            Log.d("StopEpoxyController", getPatternNumbers(stop.patterns).toString())
-            if (stop.patterns == null) {
+            if (stop.zoneId == null) {
+                lblZone.isGone = true
+            } else {
+                lblZone.isVisible = true
+                tvZone.text = stop.zoneId
+            }
+
+            if (stop.patterns.isNullOrEmpty()) {
                 tvPatternNumbers.isGone = true
             } else {
                 tvPatternNumbers.isVisible = true

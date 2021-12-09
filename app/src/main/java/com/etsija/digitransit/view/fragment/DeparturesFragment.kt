@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.etsija.digitransit.databinding.FragmentDeparturesBinding
@@ -57,8 +59,15 @@ class DeparturesFragment : BaseFragment() {
         binding.mcStopInfo.setStrokeColor(ColorStateList.valueOf(color))
         
         binding.tvStopName.text = selectedStop?.stopName
-        binding.tvCode.text = selectedStop?.stopCode
-        binding.tvZone.text = selectedStop?.zoneId
+        binding.tvCode.text = selectedStop?.stopCode ?: selectedStop?.gtfsId
+        //binding.tvZone.text = selectedStop?.zoneId
+
+        if (selectedStop?.zoneId == null) {
+            binding.lblZone.isGone = true
+        } else {
+            binding.lblZone.isVisible = true
+            binding.tvZone.text = selectedStop?.zoneId
+        }
 
         // Get pattern names from Patterns and show the patterns in a scrollable TextView
         // so that the view does not take the whole screen for busy stops
@@ -66,8 +75,17 @@ class DeparturesFragment : BaseFragment() {
             ?.map { pattern ->
                 pattern?.name
             }?.joinToString(separator = "\n")
+
+        if (justNames.isNullOrEmpty()) {
+            binding.lblPatterns.isGone = true
+            binding.tvPatterns.isGone = true
+        } else {
+            binding.lblPatterns.isVisible = true
+            binding.tvPatterns.text = justNames
+        }
+
         binding.tvPatterns.movementMethod = ScrollingMovementMethod()
-        binding.tvPatterns.text = justNames
+        //binding.tvPatterns.text = justNames
 
         binding.ervDeparturesFromStop.setController(controller)
 
