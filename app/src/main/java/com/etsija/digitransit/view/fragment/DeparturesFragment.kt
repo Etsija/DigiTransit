@@ -2,6 +2,7 @@ package com.etsija.digitransit.view.fragment
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -55,8 +56,7 @@ class DeparturesFragment : BaseFragment() {
         val color = setCardColor(selectedStop?.type!!)
         binding.tvType.setBackgroundColor(color)
         binding.mcStopInfo.setStrokeColor(ColorStateList.valueOf(color))
-
-        //binding.test.text = selectedStop?.patterns.toString()
+        
         binding.tvStopName.text = selectedStop?.stopName
         binding.tvCode.text = selectedStop?.stopCode
         binding.tvZone.text = selectedStop?.zoneId
@@ -66,6 +66,7 @@ class DeparturesFragment : BaseFragment() {
             ?.map { pattern ->
                 pattern?.name
             }?.joinToString(separator = "\n")
+        binding.tvPatterns.movementMethod = ScrollingMovementMethod()
         binding.tvPatterns.text = justNames
 
         binding.ervDeparturesFromStop.setController(controller)
