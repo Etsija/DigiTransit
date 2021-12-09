@@ -59,7 +59,7 @@ class StopEpoxyController(
 
         override fun ModelStopBinding.bind() {
             tvName.text = stop.stopName
-            tvCode.text = stop.stopCode
+            tvCode.text = stop.stopCode ?: stop.gtfsId
             tvDistance.text = stop.distance.toString()
             tvPatternNumbers.text = getPatternNumbers(stop.patterns)
 

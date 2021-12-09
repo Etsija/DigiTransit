@@ -1,11 +1,13 @@
 query Alerts {
     alerts {
+        id
         alertDescriptionText
         alertSeverityLevel
         effectiveStartDate
         effectiveEndDate
         stop {
             gtfsId
+            code
             name
             zoneId
         }

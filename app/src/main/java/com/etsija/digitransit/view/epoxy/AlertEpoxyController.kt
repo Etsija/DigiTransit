@@ -45,7 +45,7 @@ class AlertEpoxyController(): EpoxyController() {
         alerts.sortedByDescending {
             it.effectiveStartDate
         }.forEach { alert ->
-            AlertEpoxyModel(alert).id(alert.effectiveStartDate).addTo(this)
+            AlertEpoxyModel(alert).id(alert.id).addTo(this)
         }
     }
 
@@ -61,11 +61,11 @@ class AlertEpoxyController(): EpoxyController() {
 
             // Stop information is nullable i.e. an alert doesn't necessarily
             // include stop data
-            if (alert.stopId == null) {
+            if (alert.stopCode == null) {
                 tvStopId.isGone = true
             } else {
                 tvStopId.isVisible = true
-                tvStopId.text = alert.stopId
+                tvStopId.text = alert.stopCode
             }
 
             if (alert.stopName == null) {

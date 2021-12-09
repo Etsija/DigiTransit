@@ -11,7 +11,9 @@ import com.etsija.digitransit.AlertsQuery
 import com.etsija.digitransit.StopArrDepQuery
 import com.etsija.digitransit.StopsByRadiusQuery
 import com.etsija.digitransit.utils.Constants.Companion.BASE_URL
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 // This class creates the ApolloClient object and does the network call to the API endpoint
 object ApolloClient {
@@ -30,10 +32,12 @@ object ApolloClient {
                 apollo.query(StopsByRadiusQuery(lat, lon, radius)).await()
             } catch (e: ApolloException) {
                 // Handle protocol errors
+                Log.d("ApolloClient", e.toString())
                 return@coroutineScope
             }
             if (response?.hasErrors() == true || response?.data == null) {
                 // Handle other errors
+                Log.d("ApolloClient", "Other network error")
                 return@coroutineScope
             }
         }

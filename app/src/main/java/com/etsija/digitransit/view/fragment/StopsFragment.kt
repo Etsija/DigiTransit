@@ -65,7 +65,7 @@ class StopsFragment : BaseFragment(), StopInterface {
         }
 
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
-            //Log.d(LOG, stops.toString())
+            Log.d(LOG, stops.toString())
             controller.stops = stops as ArrayList<Stop>
         })
     }
