@@ -34,7 +34,8 @@ class SharedRepository() {
 
     suspend fun getStops(lat: Double, lon: Double, radius: Int): List<Stop> {
 
-        val response = ApolloClient.getStops(lat, lon, radius).await().data
+        //val response = ApolloClient.getStops(lat, lon, radius).await().data
+        val response = ApolloClient.getStopsSafely(lat, lon, radius)?.data
         val stops = mutableListOf<Stop>()
 
         if (response != null) {

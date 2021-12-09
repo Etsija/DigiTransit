@@ -61,7 +61,8 @@ class DeparturesFragment : BaseFragment() {
         binding.tvCode.text = selectedStop?.stopCode
         binding.tvZone.text = selectedStop?.zoneId
 
-        // Only a temp solution!
+        // Get pattern names from Patterns and show the patterns in a scrollable TextView
+        // so that the view does not take the whole screen for busy stops
         val justNames = selectedStop?.patterns
             ?.map { pattern ->
                 pattern?.name
