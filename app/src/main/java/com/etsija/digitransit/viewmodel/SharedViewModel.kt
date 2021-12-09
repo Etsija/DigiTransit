@@ -1,21 +1,14 @@
 package com.etsija.digitransit.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.apollographql.apollo.exception.ApolloException
-import com.etsija.digitransit.AlertsQuery
 import com.etsija.digitransit.model.Alert
 import com.etsija.digitransit.model.Departure
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.repository.SharedRepository
-import com.etsija.digitransit.utils.Constants
-import com.etsija.digitransit.utils.Constants.Companion.ONE_SECOND
 import com.etsija.digitransit.utils.prefs
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SharedViewModel(): ViewModel() {

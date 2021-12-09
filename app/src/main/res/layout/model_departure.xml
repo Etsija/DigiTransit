@@ -7,18 +7,18 @@
     android:layout_marginHorizontal="8dp"
     android:layout_marginTop="8dp"
     app:strokeWidth="1dp"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvStopNameInDepartures"
+            android:id="@+id/tvTimeUntilDeparture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,29 +26,33 @@
             tools:text="~05:54" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvPatternNumbers"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvHeadsign"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvRouteName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvStopNameInDepartures"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeUntilDeparture"
             tools:text="Kirurgi via Ruskeasuo" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvRoute"
+            android:id="@+id/tvRouteName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCode"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
             tools:text="10H" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvCode"
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

@@ -4,7 +4,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.ModelAlertBinding

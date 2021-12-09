@@ -1,9 +1,6 @@
 package com.etsija.digitransit.view.epoxy
 
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.util.Log
-import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
@@ -61,7 +58,7 @@ class StopEpoxyController(
     ): ViewBindingKotlinModel<ModelStopBinding>(R.layout.model_stop) {
 
         override fun ModelStopBinding.bind() {
-            tvStopNameInStops.text = stop.stopName
+            tvName.text = stop.stopName
             tvCode.text = stop.stopCode
             tvDistance.text = stop.distance.toString()
             tvPatternNumbers.text = getPatternNumbers(stop.patterns)

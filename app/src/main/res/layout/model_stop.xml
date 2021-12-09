@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvStopNameInStops"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -32,11 +32,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@+id/tvType"
-            app:layout_constraintTop_toBottomOf="@+id/tvStopNameInStops"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
             tools:text="34, 45, 56" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblPatterns"
+            android:id="@+id/lblDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -52,9 +52,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/lblPatterns"
-            app:layout_constraintStart_toEndOf="@+id/lblPatterns"
-            app:layout_constraintTop_toTopOf="@+id/lblPatterns"
+            app:layout_constraintBottom_toBottomOf="@+id/lblDistance"
+            app:layout_constraintStart_toEndOf="@+id/lblDistance"
+            app:layout_constraintTop_toTopOf="@+id/lblDistance"
             tools:text="340" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -66,7 +66,7 @@
             android:textStyle="bold"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvStopNameInStops"
+            app:layout_constraintEnd_toStartOf="@+id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/cardview_dark_background"

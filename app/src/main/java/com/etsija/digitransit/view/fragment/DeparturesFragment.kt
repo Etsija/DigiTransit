@@ -1,7 +1,6 @@
 package com.etsija.digitransit.view.fragment
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,21 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.etsija.digitransit.databinding.FragmentDeparturesBinding
 import com.etsija.digitransit.model.Departure
-import com.etsija.digitransit.model.Pattern
-
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants
-import com.etsija.digitransit.utils.Helpers
-import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
 import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
-import com.etsija.digitransit.utils.Helpers.Companion.tidyPatternName
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.DeparturesEpoxyController
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class DeparturesFragment : BaseFragment() {
 
@@ -66,7 +57,7 @@ class DeparturesFragment : BaseFragment() {
         binding.mcStopInfo.setStrokeColor(ColorStateList.valueOf(color))
 
         //binding.test.text = selectedStop?.patterns.toString()
-        binding.tvStopNameInDepartures.text = selectedStop?.stopName
+        binding.tvStopName.text = selectedStop?.stopName
         binding.tvCode.text = selectedStop?.stopCode
         binding.tvZone.text = selectedStop?.zoneId
 
@@ -76,6 +67,8 @@ class DeparturesFragment : BaseFragment() {
                 pattern?.name
             }?.joinToString(separator = "\n")
         binding.tvPatterns.text = justNames
+
+        binding.ervDeparturesFromStop.setController(controller)
 
         // Launch a coroutine to poll next departures
         lifecycleScope.launch {
@@ -90,13 +83,14 @@ class DeparturesFragment : BaseFragment() {
         }
 
         sharedViewModel.departures.observe(viewLifecycleOwner, { departures ->
-            Log.d(LOG, departures.toString())
+            //Log.d(LOG, departures.toString())
             controller.departures = departures as ArrayList<Departure>
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        lifecycleScope.cancel()
         _binding = null
     }
 }

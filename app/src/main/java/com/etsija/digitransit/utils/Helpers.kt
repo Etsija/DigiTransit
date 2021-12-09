@@ -12,6 +12,7 @@ class Helpers {
 
     companion object {
 
+        // Get date from Unix Epoch in seconds (10 digits)
         fun getDateTime(s: String): String {
             try {
                 val sdf = SimpleDateFormat("yyyy-MM-dd")
@@ -20,6 +21,15 @@ class Helpers {
             } catch (e: Exception) {
                 return e.toString()
             }
+        }
+
+        // Get hrs, min, sec from seconds -> returns string
+        fun getHMS(totalSeconds: Int): String {
+            val hours = totalSeconds / 3600
+            val minutes = (totalSeconds % 3600) / 60
+            val seconds = totalSeconds % 60
+
+            return String.format("%02d:%02d:%02d", hours, minutes, seconds)
         }
 
         // Set the symbol (character) on a stop card based on stop type

@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvStopNameInDepartures"
+                android:id="@+id/tvStopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -39,10 +39,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:text="Patterns via this stop:"
                 android:textStyle="italic"
                 app:layout_constraintStart_toEndOf="@+id/tvType"
-                app:layout_constraintTop_toBottomOf="@+id/lblZone" />
+                app:layout_constraintTop_toBottomOf="@+id/tvStopName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvPatterns"
@@ -66,7 +67,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvStopNameInDepartures"
+                app:layout_constraintEnd_toStartOf="@+id/tvStopName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:background="@color/cardview_dark_background"

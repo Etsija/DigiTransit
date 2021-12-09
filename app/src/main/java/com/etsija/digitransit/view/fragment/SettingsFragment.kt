@@ -1,15 +1,12 @@
 package com.etsija.digitransit.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.FragmentSettingsBinding
-import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.utils.App.Companion.prefs
 
 class SettingsFragment : Fragment() {
