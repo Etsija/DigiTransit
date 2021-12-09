@@ -26,7 +26,6 @@ class DeparturesFragment : BaseFragment() {
     private var _binding: FragmentDeparturesBinding? = null
     private val binding get() = _binding!!
     private val controller = DeparturesEpoxyController()
-    private lateinit var lvPatterns: ListView
 
     private val safeArgs: DeparturesFragmentArgs by navArgs()
     private val selectedStop: Stop? by lazy {

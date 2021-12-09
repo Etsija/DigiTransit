@@ -35,7 +35,7 @@ class DeparturesEpoxyController: EpoxyController() {
         }
 
         if (departures.isEmpty()) {
-            StopEpoxyController.EmptyStateEpoxyModel().id("departures_empty_state").addTo(this)
+            EmptyStateEpoxyModel().id("departures_empty_state").addTo(this)
             return
         }
 

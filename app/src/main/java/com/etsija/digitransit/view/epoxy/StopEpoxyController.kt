@@ -1,6 +1,9 @@
 package com.etsija.digitransit.view.epoxy
 
 import android.content.res.ColorStateList
+import android.util.Log
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
@@ -61,7 +64,15 @@ class StopEpoxyController(
             tvName.text = stop.stopName
             tvCode.text = stop.stopCode ?: stop.gtfsId
             tvDistance.text = stop.distance.toString()
-            tvPatternNumbers.text = getPatternNumbers(stop.patterns)
+
+            //tvPatternNumbers.text = getPatternNumbers(stop.patterns)
+            Log.d("StopEpoxyController", getPatternNumbers(stop.patterns).toString())
+            if (stop.patterns == null) {
+                tvPatternNumbers.isGone = true
+            } else {
+                tvPatternNumbers.isVisible = true
+                tvPatternNumbers.text = getPatternNumbers((stop.patterns))
+            }
 
             // Set info card label based on type of the stop
             val text = setCardSymbol(stop.type!!)
