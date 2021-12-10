@@ -23,6 +23,7 @@ object StopMapper {
             response.node.stop.name,
             response.node.stop.code,
             response.node.stop.zoneId,
+            response.node.stop.parentStation?.name,
             response.node.distance,
             PatternMapper.buildFrom(response.node),
             vehicleTypeAsString

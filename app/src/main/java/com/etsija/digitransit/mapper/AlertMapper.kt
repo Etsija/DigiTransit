@@ -13,6 +13,7 @@ object AlertMapper {
             response.feed,
             response.alertDescriptionText,
             response.alertSeverityLevel?.toString(),
+            response.effectiveStartDate?.toString()?.toDouble(),
             response.effectiveStartDate?.toString()?.let { getDateTime(it) },
             response.effectiveEndDate?.toString()?.let { getDateTime(it) },
             response.stop?.gtfsId,

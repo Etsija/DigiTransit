@@ -6,6 +6,7 @@ data class Stop(
     val stopName: String,
     val stopCode: String?,
     val zoneId: String?,
+    val parentName: String?,
     val distance: Int?,
     val patterns: List<Pattern?>?,
     val type: String?

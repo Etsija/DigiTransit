@@ -41,12 +41,19 @@ class AlertEpoxyController(): EpoxyController() {
             return
         }
 
+        // Sort alerts by feed, then by descending start date
+        alerts
+            .sortedWith(compareBy({it.feed}, {it.effectiveStartDateAsDouble?.times(-1)}))
+            .forEach { alert ->
+                AlertEpoxyModel(alert).id(alert.id).addTo(this)
+            }
+
         // Sort alerts by descending start date
-        alerts.sortedByDescending {
-            it.effectiveStartDate
-        }.forEach { alert ->
-            AlertEpoxyModel(alert).id(alert.id).addTo(this)
-        }
+        //alerts.sortedByDescending {
+        //    it.effectiveStartDate
+        //}.forEach { alert ->
+        //    AlertEpoxyModel(alert).id(alert.id).addTo(this)
+        //}
     }
 
     // This is the Epoxy model for one alert in the list

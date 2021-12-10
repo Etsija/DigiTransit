@@ -7,6 +7,7 @@ data class Alert(
     val feed: String?,
     val description: String,
     val severity: String?,
+    val effectiveStartDateAsDouble: Double?,
     val effectiveStartDate: String?,
     val effectiveEndDate: String?,
     val stopId: String?,

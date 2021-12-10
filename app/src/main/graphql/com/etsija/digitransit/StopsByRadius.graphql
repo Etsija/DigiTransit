@@ -8,6 +8,9 @@ query StopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {
                     name
                     code
                     zoneId
+                    parentStation {
+                        name
+                    }
                     patterns {
                         id
                         name

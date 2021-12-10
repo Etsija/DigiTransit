@@ -63,6 +63,7 @@ class StopEpoxyController(
         override fun ModelStopBinding.bind() {
             tvName.text = stop.stopName
             tvCode.text = stop.stopCode ?: stop.gtfsId
+            tvParentName.text = stop.parentName
             tvDistance.text = stop.distance.toString()
 
             if (stop.zoneId == null) {
