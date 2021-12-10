@@ -67,8 +67,10 @@ class StopEpoxyController(
 
             if (stop.zoneId == null) {
                 lblZone.isGone = true
+                tvZone.isGone = true
             } else {
                 lblZone.isVisible = true
+                tvZone.isVisible = true
                 tvZone.text = stop.zoneId
             }
 

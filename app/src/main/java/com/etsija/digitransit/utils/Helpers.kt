@@ -1,6 +1,9 @@
 package com.etsija.digitransit.utils
 
+import android.content.Context
 import android.graphics.Color
+import android.location.Geocoder
+import android.util.Log
 import com.etsija.digitransit.model.Pattern
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable.isActive
@@ -74,6 +77,16 @@ class Helpers {
             return s.replace("\\s*\\([^\\)]*\\)\\s*".toRegex(), " ")
         }
 
+        // Get address based on location
+        fun getAddress(context: Context, lat: Double, lon: Double): String? {
+            val geoCoder = Geocoder(context, Locale.getDefault())
+            val addresses = geoCoder.getFromLocation(lat, lon, 1)
+
+            return addresses[0]
+                .getAddressLine(0)
+                .toString()
+                .substringBefore(", ")
+        }
 
 
     }

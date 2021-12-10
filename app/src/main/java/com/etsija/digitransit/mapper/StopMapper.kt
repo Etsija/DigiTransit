@@ -7,13 +7,14 @@ object StopMapper {
 
     fun buildFrom(response: StopsByRadiusQuery.Edge): Stop {
 
-        // Set info card color based on alert severity
+        // Set info card color based on stop type. If type cannot be parsed directly,
+        // it is returned as the original numeric code to be further parsed
         val vehicleTypeAsString = when (response.node?.stop?.vehicleType) {
             0 -> "TRAM"
             1 -> "SUBWAY"
-            2 -> "RAIL"
+            2, 109 -> "RAIL"
             3 -> "BUS"
-            else -> "UNKNOWN"
+            else -> response.node?.stop?.vehicleType.toString()
         }
 
         return Stop(

@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants.Companion.ONE_SECOND
+import com.etsija.digitransit.utils.Helpers.Companion.getAddress
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.StopEpoxyController
 import com.etsija.digitransit.view.epoxy.StopInterface
@@ -59,8 +60,6 @@ class StopsFragment : BaseFragment(), StopInterface {
                         prefs.lastLon!!.toDouble(),
                         prefs.searchRadius
                     )
-                    // Testing Oulu
-                    //sharedViewModel.pollStops(65.0156201, 25.4697043, 500)
                     delay(prefs.stopsSearchInterval * ONE_SECOND)
                 }
             }
@@ -90,8 +89,31 @@ class StopsFragment : BaseFragment(), StopInterface {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
-            binding.txtLat.text = prefs.lastLat
-            binding.txtLon.text = prefs.lastLon
+            // Testing Helsinki, Aarnen talo
+            //prefs.lastLat = "60.1872239"
+            //prefs.lastLon = "24.9533152"
+
+            // Testing Helsinki, päärautatieasema
+            //prefs.lastLat = "60.171323"
+            //prefs.lastLon = "24.940923"
+
+            // Testing Oulu
+            //prefs.lastLat = "65.0156201"
+            //prefs.lastLon = "25.4697043"
+
+            // Testing Hyvinkää/Vehkoja
+            //prefs.lastLat = "60.608580"
+            //prefs.lastLon = "24.838765"
+
+            binding.tvLat.text = prefs.lastLat
+            binding.tvLon.text = prefs.lastLon
+            binding.tvAddress.text = context?.let { it1 ->
+                getAddress(it1,
+                    //it.longitude.toDouble(),
+                    //it.longitude.toDouble())
+                    prefs.lastLat.toString().toDouble(),
+                    prefs.lastLon.toString().toDouble())
+            }
             //Log.d(LOG, prefs.lastLat + ":" + prefs.lastLon)
         })
     }

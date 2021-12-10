@@ -33,7 +33,7 @@ class SharedViewModel(): ViewModel() {
     fun init() {
         getAlerts()
         // Get stops using last known location and search parameters. This is to make
-        // user experiance immediate
+        // user experience immediate
         getStops(
             prefs.lastLat!!.toDouble(),
             prefs.lastLon!!.toDouble(),

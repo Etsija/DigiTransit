@@ -9,31 +9,31 @@
         android:id="@+id/ervStops"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical"
         android:paddingBottom="86dp"
         app:itemSpacing="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblLat" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/lblLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
         android:text="Lat:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtLat"
+        android:id="@+id/tvLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -41,7 +41,19 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintStart_toEndOf="@+id/lblLat"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="30.45355343"/>
+        tools:text="60.2096663"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblLat"
+        tools:text="Ahjokuja 1" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/lblLon"
@@ -53,19 +65,17 @@
         android:layout_marginEnd="4dp"
         android:text="Lon:"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf=" @+id/txtLon"
+        app:layout_constraintEnd_toStartOf=" @+id/tvLon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtLon"
+        android:id="@+id/tvLon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="25.223823"/>
+        tools:text="24.8933614" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
