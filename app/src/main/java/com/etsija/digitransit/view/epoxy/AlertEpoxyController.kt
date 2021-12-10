@@ -55,6 +55,7 @@ class AlertEpoxyController(): EpoxyController() {
     ): ViewBindingKotlinModel<ModelAlertBinding>(R.layout.model_alert) {
 
         override fun ModelAlertBinding.bind() {
+            tvFeed.text = alert.feed
             tvStart.text = alert.effectiveStartDate
             tvEnd.text = alert.effectiveEndDate
             tvDescription.text = alert.description
@@ -86,6 +87,7 @@ class AlertEpoxyController(): EpoxyController() {
             val color = when (alert.severity) {
                 "INFO" -> Color.GREEN
                 "WARNING" -> Color.YELLOW
+                "UNKNOWN_SEVERITY" -> Color.DKGRAY
                 else -> Color.RED
             }
             tvSeverity.setBackgroundColor(color)

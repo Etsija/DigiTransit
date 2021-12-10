@@ -10,6 +10,7 @@ object AlertMapper {
     fun buildFrom(response: AlertsQuery.Alert): Alert {
         return Alert(
             response.id,
+            response.feed,
             response.alertDescriptionText,
             response.alertSeverityLevel?.toString(),
             response.effectiveStartDate?.toString()?.let { getDateTime(it) },

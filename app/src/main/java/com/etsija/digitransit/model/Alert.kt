@@ -4,6 +4,7 @@ import java.util.*
 
 data class Alert(
     val id: String,
+    val feed: String?,
     val description: String,
     val severity: String?,
     val effectiveStartDate: String?,

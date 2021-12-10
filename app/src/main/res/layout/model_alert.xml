@@ -22,20 +22,32 @@
             android:layout_marginBottom="4dp"
             android:text="Alkaa:"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvFeed"
+            app:layout_constraintStart_toEndOf="@+id/tvSeverity" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/tvSeverity"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="HSL" />
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:text="Päättyy:"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/lblStart"
             app:layout_constraintEnd_toStartOf="@+id/tvEnd"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/lblStart" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDescription"
@@ -105,20 +117,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/lblStart"
             app:layout_constraintStart_toEndOf="@+id/lblStart"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lblStart"
             tools:text="24.12.2021" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblStart"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lblStart"
             tools:text="1.1.2022" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
