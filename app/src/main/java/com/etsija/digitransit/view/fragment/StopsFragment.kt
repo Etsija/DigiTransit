@@ -30,6 +30,7 @@ class StopsFragment : BaseFragment(), StopInterface {
     private val controller = StopEpoxyController(this)
     private var latitude: String = "60.2068726"
     private var longitude: String = "24.8939462"
+    private var networkFailure: Boolean = false
 
     // ViewModel for this activity's lifecycle
     val locationViewModel: LocationViewModel by lazy {
@@ -66,14 +67,14 @@ class StopsFragment : BaseFragment(), StopInterface {
         }
 
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
-            Log.d(LOG, stops.toString())
-
-            // Convert the List<> from SharedViewModel into ArrayList<>
-            if (!stops.isNullOrEmpty()) {
-                controller.stops = stops as ArrayList<Stop>
-            } else {
-                controller.stops = arrayListOf()
+            if (stops == null) {
+                Toast.makeText(activity, "Network problems!", Toast.LENGTH_SHORT).show()
+                networkFailure = true
+                return@observe
             }
+            networkFailure = false
+            Log.d(LOG, stops.toString())
+            controller.stops = stops as ArrayList<Stop>
 
             // After data has changed, scroll to top of list to show nearest stops first
             binding.ervStops.scrollToPosition(0)
@@ -153,9 +154,11 @@ class StopsFragment : BaseFragment(), StopInterface {
     }
 
     override fun onStopSelected(stop: Stop) {
-        val navDirections = StopsFragmentDirections
-            .actionStopsFragmentToDeparturesFragment(stop.gtfsId)
-        navigateViaNavGraph(navDirections)
+        if (!networkFailure) {
+            val navDirections = StopsFragmentDirections
+                .actionStopsFragmentToDeparturesFragment(stop.gtfsId)
+            navigateViaNavGraph(navDirections)
+        }
     }
 
     override fun onDestroyView() {

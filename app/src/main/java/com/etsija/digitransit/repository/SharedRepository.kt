@@ -16,25 +16,9 @@ import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.network.ApolloClient
 import com.etsija.digitransit.network.ApolloClient.apollo
 
-class SharedRepository() {
+class SharedRepository {
 
-    suspend fun getAlerts(): List<Alert> {
-
-        val response = ApolloClient.getAlerts().await().data
-        val alerts = mutableListOf<Alert>()
-
-        if (response != null) {
-            for (alert in response.alerts!!) {
-                alerts.add(AlertMapper.buildFrom(alert!!))
-            }
-            return alerts
-        }
-        return emptyList()
-    }
-
-    suspend fun getStops(lat: Double, lon: Double, radius: Int): List<Stop> {
-
-        //val response = ApolloClient.getStops(lat, lon, radius).await().data
+    suspend fun getStops(lat: Double, lon: Double, radius: Int): List<Stop>? {
         val response = ApolloClient.getStopsSafely(lat, lon, radius)?.data
         val stops = mutableListOf<Stop>()
 
@@ -44,11 +28,11 @@ class SharedRepository() {
             }
             return stops
         }
-        return emptyList()
+        return null
     }
 
-    suspend fun getDepartures(gtfsId: String): List<Departure> {
-        val response = ApolloClient.getDepartures(gtfsId).await().data
+    suspend fun getDepartures(gtfsId: String): List<Departure>? {
+        val response = ApolloClient.getDeparturesSafely(gtfsId)?.data
         val departures = mutableListOf<Departure>()
 
         if (response != null) {
@@ -57,6 +41,19 @@ class SharedRepository() {
             }
             return departures
         }
-        return emptyList()
+        return null
+    }
+
+    suspend fun getAlerts(): List<Alert>? {
+        val response = ApolloClient.getAlertsSafely()?.data
+        val alerts = mutableListOf<Alert>()
+
+        if (response != null) {
+            for (alert in response.alerts!!) {
+                alerts.add(AlertMapper.buildFrom(alert!!))
+            }
+            return alerts
+        }
+        return null
     }
 }

@@ -40,5 +40,6 @@ class DigiTransitResponse<T>(
         get() = !failed && this.data?.hasErrors() == false
 
     val body: T
-        get() = this.body!!
+        //get() = this.body!!
+        get() = this.data!!.data!!
 }

@@ -25,27 +25,70 @@ object ApolloClient {
     }
 
     suspend fun getStopsSafely(lat: Double, lon: Double, radius: Int): Response<StopsByRadiusQuery.Data>? {
-        var response: Response<StopsByRadiusQuery.Data>? = null
+        var response: Response<StopsByRadiusQuery.Data>?
 
         coroutineScope {
             response = try {
                 apollo.query(StopsByRadiusQuery(lat, lon, radius)).await()
             } catch (e: ApolloException) {
                 // Handle protocol errors
-                Log.d("ApolloClient", e.toString())
+                Log.d("ApolloClient: getStopsSafely()", e.toString())
+                response = null
                 return@coroutineScope
             }
             if (response?.hasErrors() == true || response?.data == null) {
                 // Handle other errors
-                Log.d("ApolloClient", "Other network error")
+                Log.d("ApolloClient: getStopsSafely()", "Other network error")
+                response = null
                 return@coroutineScope
             }
         }
         return response
     }
 
-    fun getAlerts(): ApolloQueryCall<AlertsQuery.Data> =
-        apollo.query(AlertsQuery())
+    suspend fun getDeparturesSafely(gtfsId: String): Response<StopArrDepQuery.Data>? {
+        var response: Response<StopArrDepQuery.Data>?
+
+        coroutineScope {
+            response = try {
+                apollo.query(StopArrDepQuery(gtfsId)).await()
+            } catch (e: ApolloException) {
+                // Handle protocol errors
+                Log.d("ApolloClient: getDeparturesSafely()", e.toString())
+                response = null
+                return@coroutineScope
+            }
+            if (response?.hasErrors() == true || response?.data == null) {
+                // Handle other errors
+                Log.d("ApolloClient: getDeparturesSafely()", "Other network error")
+                response = null
+                return@coroutineScope
+            }
+        }
+        return response
+    }
+
+    suspend fun getAlertsSafely(): Response<AlertsQuery.Data>? {
+        var response: Response<AlertsQuery.Data>?
+
+        coroutineScope {
+            response = try {
+                apollo.query(AlertsQuery()).await()
+            } catch (e: ApolloException) {
+                // Handle protocol errors
+                Log.d("ApolloClient: getAlertsSafely()", e.toString())
+                response = null
+                return@coroutineScope
+            }
+            if (response?.hasErrors() == true || response?.data == null) {
+                // Handle other errors
+                Log.d("ApolloClient: getAlertsSafely()", "Other network error")
+                response = null
+                return@coroutineScope
+            }
+        }
+        return response
+    }
 
     fun getStops(lat: Double, lon: Double, radius: Int): ApolloQueryCall<StopsByRadiusQuery.Data> =
         apollo.query(StopsByRadiusQuery(lat, lon, radius))
@@ -53,11 +96,6 @@ object ApolloClient {
     fun getDepartures(gtfsId: String): ApolloQueryCall<StopArrDepQuery.Data> =
         apollo.query(StopArrDepQuery(gtfsId))
 
-    private inline fun <T> safeApiCall(apicall: () -> Response<T>): DigiTransitResponse<T> {
-        return try {
-            DigiTransitResponse.success(apicall.invoke())
-        } catch(e: Exception) {
-            DigiTransitResponse.failure(e)
-        }
-    }
+    fun getAlerts(): ApolloQueryCall<AlertsQuery.Data> =
+        apollo.query(AlertsQuery())
 }

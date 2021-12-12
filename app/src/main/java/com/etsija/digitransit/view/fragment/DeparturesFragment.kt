@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -102,7 +103,11 @@ class DeparturesFragment : BaseFragment() {
         }
 
         sharedViewModel.departures.observe(viewLifecycleOwner, { departures ->
-            //Log.d(LOG, departures.toString())
+            if (departures == null) {
+                Toast.makeText(activity, "Network problems!", Toast.LENGTH_SHORT).show()
+                return@observe
+            }
+            Log.d(LOG, departures.toString())
             controller.departures = departures as ArrayList<Departure>
         })
     }
