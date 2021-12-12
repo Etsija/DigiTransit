@@ -68,11 +68,14 @@ class StopsFragment : BaseFragment(), StopInterface {
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
             Log.d(LOG, stops.toString())
 
-            // Try to handle java.lang.ClassCastException "EmptyList cannot be cast to java.util.ArrayList
+            // Convert the List<> from SharedViewModel into ArrayList<>
             if (!stops.isNullOrEmpty()) {
                 controller.stops = stops as ArrayList<Stop>
+            } else {
+                controller.stops = arrayListOf()
             }
-            // After data has changed, scroll to top of list to show nearest stops
+
+            // After data has changed, scroll to top of list to show nearest stops first
             binding.ervStops.scrollToPosition(0)
         })
     }
