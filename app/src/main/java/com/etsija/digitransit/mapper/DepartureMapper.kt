@@ -24,7 +24,7 @@ object DepartureMapper {
             strUntilRealtime,
             response.realtime!!,
             getDateTime(response.serviceDay.toString()),
-            response.trip?.route?.shortName!!,
+            response.trip?.route?.shortName,
             response.headsign
         )
     }

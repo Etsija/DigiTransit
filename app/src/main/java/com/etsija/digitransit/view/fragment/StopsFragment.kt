@@ -67,7 +67,13 @@ class StopsFragment : BaseFragment(), StopInterface {
 
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
             Log.d(LOG, stops.toString())
-            controller.stops = stops as ArrayList<Stop>
+
+            // Try to handle java.lang.ClassCastException "EmptyList cannot be cast to java.util.ArrayList
+            if (!stops.isNullOrEmpty()) {
+                controller.stops = stops as ArrayList<Stop>
+            }
+            // After data has changed, scroll to top of list to show nearest stops
+            binding.ervStops.scrollToPosition(0)
         })
     }
 
@@ -105,14 +111,21 @@ class StopsFragment : BaseFragment(), StopInterface {
             //prefs.lastLat = "60.608580"
             //prefs.lastLon = "24.838765"
 
+            // Testing Mikkeli/Harri Häkkinen
+            //prefs.lastLat = "61.6888813"
+            //prefs.lastLon = "27.2577625"
+
             binding.tvLat.text = prefs.lastLat
             binding.tvLon.text = prefs.lastLon
+
             binding.tvAddress.text = context?.let { it1 ->
-                getAddress(it1,
+                getAddress(
+                    it1,
                     //it.longitude.toDouble(),
                     //it.longitude.toDouble())
                     prefs.lastLat.toString().toDouble(),
-                    prefs.lastLon.toString().toDouble())
+                    prefs.lastLon.toString().toDouble()
+                )
             }
             //Log.d(LOG, prefs.lastLat + ":" + prefs.lastLon)
         })

@@ -44,13 +44,16 @@ class StopEpoxyController(
             return
         }
 
-        // Sort alerts by descending start date
+        // Sort alerts by descending start date and add the data to controller
         stops.sortedBy {
             it.distance
         }.forEach { stop ->
-            StopEpoxyModel(stop, stopInterface)
-                .id(stop.id)
-                .addTo(this)
+            // Do not show stops without patterns
+            if (!stop.patterns.isNullOrEmpty()) {
+                StopEpoxyModel(stop, stopInterface)
+                    .id(stop.id)
+                    .addTo(this)
+            }
         }
     }
 

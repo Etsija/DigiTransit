@@ -53,7 +53,7 @@ class Helpers {
                 "METRO" -> Color.parseColor("#F67828")  // RAL 2003 Pastel Orange, HKL Metro
                 "RAIL" -> Color.parseColor("#844C82")   // RAL 4008 Signal Violet, HSL Lähijuna
                 "BUS" -> Color.parseColor("#2271B3")    // RAL 5015 Sky Blue, HSL Bussi
-                else -> Color.CYAN  // Stops outside HSL area and not identified with type
+                else -> Color.GRAY  // Stops outside HSL area and not identified with type
             }
         }
 
