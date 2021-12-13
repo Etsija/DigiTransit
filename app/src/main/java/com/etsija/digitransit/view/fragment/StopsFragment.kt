@@ -76,6 +76,10 @@ class StopsFragment : BaseFragment(), StopInterface {
             Log.d(LOG, stops.toString())
             controller.stops = stops as ArrayList<Stop>
 
+            //stops.forEach { stop ->
+            //    stop.type?.let { Log.d("Stop type", it) }
+            //}
+
             // After data has changed, scroll to top of list to show nearest stops first
             binding.ervStops.scrollToPosition(0)
         })
@@ -99,13 +103,22 @@ class StopsFragment : BaseFragment(), StopInterface {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
-            // Testing Helsinki, Aarnen talo
+            // Testing Helsinki, Aarnin talo
             //prefs.lastLat = "60.1872239"
             //prefs.lastLon = "24.9533152"
 
             // Testing Helsinki, päärautatieasema
             //prefs.lastLat = "60.171323"
             //prefs.lastLon = "24.940923"
+
+            // Testing Helsinki, Huopalahden asema
+            //prefs.lastLat = "60.218564"
+            //prefs.lastLon = "24.892657"
+
+            // Testing Helsinki, Tikkurilan rautatieasema
+            //prefs.lastLat = "60.293350"
+            //prefs.lastLon = "25.044936"
+
 
             // Testing Oulu
             //prefs.lastLat = "65.0156201"
@@ -125,8 +138,6 @@ class StopsFragment : BaseFragment(), StopInterface {
             binding.tvAddress.text = context?.let { it1 ->
                 getAddress(
                     it1,
-                    //it.longitude.toDouble(),
-                    //it.longitude.toDouble())
                     prefs.lastLat.toString().toDouble(),
                     prefs.lastLon.toString().toDouble()
                 )
@@ -144,7 +155,6 @@ class StopsFragment : BaseFragment(), StopInterface {
         when (requestCode) {
             LOCATION_PERMISSION_REQUEST -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("StopsFragment", "Enter requestLocationUpdates()")
                     requestLocationUpdates()
                 } else {
                     Toast.makeText(context, "Unable to find location without permission", Toast.LENGTH_SHORT).show()

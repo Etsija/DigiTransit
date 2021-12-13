@@ -11,7 +11,7 @@ object StopMapper {
         // it is returned as the original numeric code to be further parsed
         val vehicleTypeAsString = when (response.node?.stop?.vehicleType) {
             0 -> "TRAM"
-            1 -> "SUBWAY"
+            1 -> "METRO"
             2, 109 -> "RAIL"
             3 -> "BUS"
             else -> response.node?.stop?.vehicleType.toString()
