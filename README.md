@@ -28,6 +28,8 @@ shows any and all additional alerts that might subscribe to the alert system in 
 
 ## Stops view
 
+
+
 The StopFragment shows for all nearby stops the following information:
 - stop name
 - stop code (in Helsinki area, the code that's printed on the stop sign)
