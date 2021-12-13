@@ -25,7 +25,7 @@ import kotlinx.coroutines.*
 
 class DeparturesFragment : BaseFragment() {
 
-    private val LOG = "BaseFragment"
+    private val LOG = "DeparturesFragment"
     private var _binding: FragmentDeparturesBinding? = null
     private val binding get() = _binding!!
     private val controller = DeparturesEpoxyController()
@@ -84,19 +84,19 @@ class DeparturesFragment : BaseFragment() {
             binding.lblPatterns.isVisible = true
             binding.tvPatterns.text = justNames
         }
-
         binding.tvPatterns.movementMethod = ScrollingMovementMethod()
-        //binding.tvPatterns.text = justNames
 
         binding.ervDeparturesFromStop.setController(controller)
 
         // Launch a coroutine to poll next departures
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
+            var value = 0
             withContext(Dispatchers.IO) {
                 while (true) {
                     sharedViewModel.pollDepartures(
                         selectedStop!!.gtfsId
                     )
+                    Log.d(LOG, "lifecycleScope: ${++value}")
                     delay(prefs.arrivalsSearchInterval * Constants.ONE_SECOND)
                 }
             }
@@ -114,7 +114,6 @@ class DeparturesFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        lifecycleScope.cancel()
         _binding = null
     }
 }

@@ -53,7 +53,8 @@ class StopsFragment : BaseFragment(), StopInterface {
         prepRequestLocationUpdates()
 
         // Launch a coroutine to poll nearby stops
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
+            var value = 0
             withContext(Dispatchers.IO) {
                 while (true) {
                     sharedViewModel.pollStops(
@@ -61,12 +62,15 @@ class StopsFragment : BaseFragment(), StopInterface {
                         prefs.lastLon!!.toDouble(),
                         prefs.searchRadius
                     )
+                    Log.d(LOG, "lifecycleScope: ${++value}")
                     delay(prefs.stopsSearchInterval * ONE_SECOND)
                 }
             }
         }
 
+        // Observe stop data for changes
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
+            // Notify used about problems with the network or data
             if (stops == null) {
                 Toast.makeText(activity, "Network problems!", Toast.LENGTH_SHORT).show()
                 networkFailure = true
@@ -99,7 +103,7 @@ class StopsFragment : BaseFragment(), StopInterface {
 
     // Get the current location
     private fun requestLocationUpdates() {
-        locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
+        locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
@@ -142,7 +146,6 @@ class StopsFragment : BaseFragment(), StopInterface {
                     prefs.lastLon.toString().toDouble()
                 )
             }
-            //Log.d(LOG, prefs.lastLat + ":" + prefs.lastLon)
         })
     }
 
@@ -173,7 +176,6 @@ class StopsFragment : BaseFragment(), StopInterface {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        lifecycleScope.cancel()
         _binding = null
     }
 }
