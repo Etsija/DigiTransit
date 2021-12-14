@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.location.Geocoder
 import android.util.Log
+import android.widget.ImageView
+import com.etsija.digitransit.R
 import com.etsija.digitransit.model.Pattern
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable.isActive
@@ -43,6 +45,14 @@ class Helpers {
                 "RAIL" -> "J"
                 "BUS" -> "B"
                 else -> "" // Stops outside HSL area and not identified with type
+            }
+        }
+
+        fun setCardIcon(v: ImageView, s: String) {
+            when (s) {
+                "TRAM" -> v.setBackgroundResource(R.drawable.ic_baseline_tram_24)
+                "RAIL" -> v.setBackgroundResource(R.drawable.ic_baseline_train_24)
+                "BUS" -> v.setBackgroundResource(R.drawable.ic_baseline_directions_bus_24)
             }
         }
 

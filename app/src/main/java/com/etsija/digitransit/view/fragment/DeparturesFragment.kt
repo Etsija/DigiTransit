@@ -13,6 +13,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.FragmentDeparturesBinding
 import com.etsija.digitransit.model.Departure
 import com.etsija.digitransit.model.Stop
@@ -50,18 +51,41 @@ class DeparturesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set info card label based on type of the stop
-        val text = setCardSymbol(selectedStop?.type!!)
-        binding.tvType.text = text
+        // Set card symbol and colour based on type of stop
+        selectedStop?.type?.let { type ->
 
-        // Set info card color based on type of the stop
-        val color = setCardColor(selectedStop?.type!!)
-        binding.tvType.setBackgroundColor(color)
-        binding.mcStopInfo.setStrokeColor(ColorStateList.valueOf(color))
-        
+            // Set card colour based on type of stop
+            val color = setCardColor(type)
+            binding.tvType.setBackgroundColor(color)
+            binding.mcStopInfo.setStrokeColor(color)
+
+            // Set card symbol
+            when (type) {
+                "BUS" -> {
+                    binding.ivType.isVisible = true
+                    binding.ivType.setImageResource(R.drawable.ic_baseline_directions_bus_24)
+                    binding.tvType.text = ""
+                }
+                "TRAM" -> {
+                    binding.ivType.isVisible = true
+                    binding.ivType.setImageResource(R.drawable.ic_baseline_tram_24)
+                    binding.tvType.text = ""
+                }
+                "RAIL" -> {
+                    binding.ivType.isVisible = true
+                    binding.ivType.setImageResource(R.drawable.ic_baseline_train_24)
+                    binding.tvType.text = ""
+                }
+                "METRO" -> {
+                    binding.ivType.isGone = true
+                    binding.tvType.text = "M"
+                }
+            }
+        }
+
+        // Set other card info
         binding.tvStopName.text = selectedStop?.stopName
         binding.tvCode.text = selectedStop?.stopCode ?: selectedStop?.gtfsId
-        //binding.tvZone.text = selectedStop?.zoneId
 
         if (selectedStop?.zoneId == null) {
             binding.lblZone.isGone = true
@@ -85,7 +109,6 @@ class DeparturesFragment : BaseFragment() {
             binding.tvPatterns.text = justNames
         }
         binding.tvPatterns.movementMethod = ScrollingMovementMethod()
-
         binding.ervDeparturesFromStop.setController(controller)
 
         // Launch a coroutine to poll next departures

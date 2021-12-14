@@ -70,8 +70,16 @@
             app:layout_constraintEnd_toStartOf="@+id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/cardview_dark_background"
-            tools:text="R" />
+            tools:background="@color/cardview_dark_background" />
+
+        <ImageView
+            android:id="@+id/ivType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvType"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvType" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCode"

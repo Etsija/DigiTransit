@@ -10,6 +10,7 @@ import com.etsija.digitransit.databinding.*
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
+import com.etsija.digitransit.utils.Helpers.Companion.setCardIcon
 import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 
 class StopEpoxyController(
@@ -85,14 +86,37 @@ class StopEpoxyController(
                 tvPatternNumbers.text = getPatternNumbers((stop.patterns))
             }
 
-            // Set info card label based on type of the stop
-            val text = setCardSymbol(stop.type!!)
-            tvType.text = text
+            // Set card symbol and colour based on type of stop
+            stop.type?.let { type ->
 
-            // Set info card color based on type of the stop
-            val color = setCardColor(stop.type)
-            tvType.setBackgroundColor(color)
-            root.setStrokeColor(ColorStateList.valueOf(color))
+                // Set card colour based on type of stop
+                val color = setCardColor(type)
+                tvType.setBackgroundColor(color)
+                root.setStrokeColor(color)
+
+                // Set card symbol
+                when (type) {
+                    "BUS" -> {
+                        ivType.isVisible = true
+                        ivType.setImageResource(R.drawable.ic_baseline_directions_bus_24)
+                        tvType.text = ""
+                    }
+                    "TRAM" -> {
+                        ivType.isVisible = true
+                        ivType.setImageResource(R.drawable.ic_baseline_tram_24)
+                        tvType.text = ""
+                    }
+                    "RAIL" -> {
+                        ivType.isVisible = true
+                        ivType.setImageResource(R.drawable.ic_baseline_train_24)
+                        tvType.text = ""
+                    }
+                    "METRO" -> {
+                        ivType.isGone = true
+                        tvType.text = "M"
+                    }
+                }
+            }
 
             root.setOnClickListener {
                 stopInterface.onStopSelected(stop)
