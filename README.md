@@ -15,8 +15,14 @@ Basically, if you're in a country which implements the DigiTransit API, in the s
 
 ## The Application
 
+In general, the app follows the MVVM architecture (in the picture, Retrofit is replaced by GraphQL).DeparturesFragment
+
+![MVVM architecture](readme_resources/final-architecture.png)
+
 The app locates you (or your mobile, of course) and polls for all public transport stops near you.  The locationing interval (in seconds) and search radius
 (in meters) are set in the Settings tab.  Also the stop polling delay and the departures polling delay (in seconds) can be set by the user.
+
+![Settings](readme_resources/SettingsFragment.jpg)
 
 When selecting a particular stop from the list of nearby stops returned from the query, the app opens a new fragment to poll&show the next departures
 from that particular stop.
@@ -28,9 +34,9 @@ shows any and all additional alerts that might subscribe to the alert system in 
 
 ## Stops view
 
+![List of stops near you](readme_resources/StopsFragment.jpg)
 
-
-The StopFragment shows for all nearby stops the following information:
+The StopsFragment shows for all nearby stops the following information:
 - stop name
 - stop code (in Helsinki area, the code that's printed on the stop sign)
 - zone (related to the fare policy of a trip on some parts of Finland public transport)
@@ -41,6 +47,8 @@ Stop card symbol and colour are chosen based on whether the Stop is recognized a
 thoroughly implemented. In other areas, the Stop card is shown as gray, indicating that the Stop has not implemented the Type property yet.
 
 ## Departures view
+
+![Next departures from this stop](readme_resources/DeparturesFragment.jpg)
 
 The DeparturesFragment shows more information on the Stop selected (for example all Patterns using this Stop), in addition with the information of the next
 departures from this Stop.
