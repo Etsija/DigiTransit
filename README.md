@@ -15,7 +15,7 @@ Basically, if you're in a country which implements the DigiTransit API, in the s
 
 ## The Application
 
-In general, the app follows the MVVM architecture (in the picture, Retrofit is replaced by GraphQL).DeparturesFragment
+In general, the app follows the MVVM architecture (in the picture, Retrofit is replaced by GraphQL).
 
 ![MVVM architecture](readme_resources/final-architecture.png)
 
@@ -29,6 +29,9 @@ from that particular stop.
 
 The app also shows all traffic alerts, grouped by the Feed of the alert, that is, by the area / public transport agency which has published this alert.
 Usually, these feeds refer to particular towns in the area of the country's public transport system.
+
+![Traffic alerts](readme_resources/AlertsFragment.jpg)
+
 Currently, the feeds in Finland seem to be HSL (Helsinki public transport), OULU (Oulu public transport) and tampere (Tampere public transport), but the app
 shows any and all additional alerts that might subscribe to the alert system in future.
 
