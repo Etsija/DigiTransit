@@ -24,7 +24,9 @@ class SharedRepository {
 
         if (response != null) {
             for (stop in response.stopsByRadius?.edges!!) {
-                stops.add(StopMapper.buildFrom(stop!!))
+                if (stop != null) {
+                    stops.add(StopMapper.buildFrom(stop.node!!))
+                }
             }
             return stops
         }
