@@ -98,6 +98,57 @@ class Helpers {
                 .substringBefore(", ")
         }
 
+        fun testLocations(case: Int): Pair<String, String> {
+            var lat: String = "60.2068726"
+            var lon: String = "24.8939462"
+
+            when (case) {
+
+                // Helsinki / Rautatieasema
+                1 -> {
+                    lat = "60.171323"
+                    lon = "24.940923"
+                }
+
+                // Helsinki / Huopalahden asema
+                2 -> {
+                    lat = "60.218564"
+                    lon = "24.892657"
+                }
+
+                // Helsinki / Aarnin talo
+                3 -> {
+                    lat = "60.1872239"
+                    lon = "24.9533152"
+                }
+
+                // Vantaa / Tikkurilan asema
+                4 -> {
+                    lat = "60.293350"
+                    lon = "25.044936"
+                }
+
+                // Hyvinkää / Minnan talo
+                5 -> {
+                    lat = "60.608580"
+                    lon = "24.838765"
+                }
+
+                // Mikkeli / Harri Häkkisen talo
+                6 -> {
+                    lat = "61.6888813"
+                    lon = "27.2577625"
+                }
+
+                // Oulu / Tuiran sillat
+                7 -> {
+                    lat = "65.0156201"
+                    lon = "25.4697043"
+                }
+            }
+
+            return Pair(lat, lon)
+        }
 
     }
 }

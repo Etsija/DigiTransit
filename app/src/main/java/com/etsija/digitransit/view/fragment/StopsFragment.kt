@@ -15,6 +15,7 @@ import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants.Companion.ONE_SECOND
 import com.etsija.digitransit.utils.Helpers.Companion.getAddress
+import com.etsija.digitransit.utils.Helpers.Companion.testLocations
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.StopEpoxyController
 import com.etsija.digitransit.view.epoxy.StopInterface
@@ -70,7 +71,7 @@ class StopsFragment : BaseFragment(), StopInterface {
 
         // Observe stop data for changes
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
-            // Notify used about problems with the network or data
+            // Notify user about problems with the network or data
             if (stops == null) {
                 Toast.makeText(activity, "Network problems!", Toast.LENGTH_SHORT).show()
                 networkFailure = true
@@ -107,34 +108,9 @@ class StopsFragment : BaseFragment(), StopInterface {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
-            // Testing Helsinki, Aarnin talo
-            //prefs.lastLat = "60.1872239"
-            //prefs.lastLon = "24.9533152"
-
-            // Testing Helsinki, päärautatieasema
-            //prefs.lastLat = "60.171323"
-            //prefs.lastLon = "24.940923"
-
-            // Testing Helsinki, Huopalahden asema
-            //prefs.lastLat = "60.218564"
-            //prefs.lastLon = "24.892657"
-
-            // Testing Helsinki, Tikkurilan rautatieasema
-            //prefs.lastLat = "60.293350"
-            //prefs.lastLon = "25.044936"
-
-
-            // Testing Oulu
-            //prefs.lastLat = "65.0156201"
-            //prefs.lastLon = "25.4697043"
-
-            // Testing Hyvinkää/Vehkoja
-            //prefs.lastLat = "60.608580"
-            //prefs.lastLon = "24.838765"
-
-            // Testing Mikkeli/Harri Häkkinen
-            //prefs.lastLat = "61.6888813"
-            //prefs.lastLon = "27.2577625"
+            //val (lat, lon) = testLocations(5)
+            //prefs.lastLat = lat
+            //prefs.lastLon = lon
 
             binding.tvLat.text = prefs.lastLat
             binding.tvLon.text = prefs.lastLon

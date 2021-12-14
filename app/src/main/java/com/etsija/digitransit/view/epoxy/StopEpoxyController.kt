@@ -115,6 +115,10 @@ class StopEpoxyController(
                         ivType.isGone = true
                         tvType.text = "M"
                     }
+                    else -> {
+                        ivType.isGone = true
+                        tvType.text = ""
+                    }
                 }
             }
 

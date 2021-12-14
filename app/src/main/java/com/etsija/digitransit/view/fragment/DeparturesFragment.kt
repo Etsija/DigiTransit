@@ -80,6 +80,10 @@ class DeparturesFragment : BaseFragment() {
                     binding.ivType.isGone = true
                     binding.tvType.text = "M"
                 }
+                else -> {
+                    binding.ivType.isGone = true
+                    binding.tvType.text = ""
+                }
             }
         }
 
