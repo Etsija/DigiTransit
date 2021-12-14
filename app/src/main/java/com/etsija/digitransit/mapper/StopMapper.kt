@@ -18,16 +18,14 @@ object StopMapper {
         }
 
         return Stop(
-            response.node?.stop!!.id,
-            response.node.stop.gtfsId,
-            response.node.stop.name,
-            response.node.stop.code,
-            response.node.stop.zoneId,
-            response.node.stop.parentStation?.name,
-            response.node.distance,
-            PatternMapper.buildFrom(response.node),
-            vehicleTypeAsString
+            gtfsId = response.node?.stop?.gtfsId,
+            stopName = response.node?.stop?.name,
+            stopCode = response.node?.stop?.code,
+            zoneId = response.node?.stop?.zoneId,
+            parentName = response.node?.stop?.parentStation?.name,
+            distance = response.node?.distance,
+            patterns = response.node?.let { PatternMapper.buildFrom(it) },
+            type = vehicleTypeAsString
         )
     }
-
-    }
+}

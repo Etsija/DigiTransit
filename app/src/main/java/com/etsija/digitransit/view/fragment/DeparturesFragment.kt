@@ -120,9 +120,9 @@ class DeparturesFragment : BaseFragment() {
             var value = 0
             withContext(Dispatchers.IO) {
                 while (true) {
-                    sharedViewModel.pollDepartures(
-                        selectedStop!!.gtfsId
-                    )
+                    selectedStop?.gtfsId?.let {
+                        sharedViewModel.pollDepartures(it)
+                    }
                     Log.d(LOG, "lifecycleScope: ${++value}")
                     delay(prefs.arrivalsSearchInterval * Constants.ONE_SECOND)
                 }

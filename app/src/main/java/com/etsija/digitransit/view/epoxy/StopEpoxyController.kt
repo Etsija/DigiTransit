@@ -52,7 +52,7 @@ class StopEpoxyController(
             // Do not show stops without patterns
             if (!stop.patterns.isNullOrEmpty()) {
                 StopEpoxyModel(stop, stopInterface)
-                    .id(stop.id)
+                    .id(stop.gtfsId)
                     .addTo(this)
             }
         }

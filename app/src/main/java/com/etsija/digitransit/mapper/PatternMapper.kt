@@ -9,9 +9,11 @@ object PatternMapper {
     fun buildFrom(response: StopsByRadiusQuery.Node): List<Pattern?>? {
 
         val thisMap: List<Pattern?>? = response.stop?.patterns?.map { pattern ->
-            Pattern(pattern!!.id, tidyPatternName(pattern.name!!))
+            Pattern(
+                name = tidyPatternName(pattern?.name!!),
+                patternStops = pattern.let { PatternStopMapper.buildFrom(it) }
+            )
         }
         return thisMap
-
     }
 }

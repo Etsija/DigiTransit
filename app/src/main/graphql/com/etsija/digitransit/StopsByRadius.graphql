@@ -2,22 +2,25 @@ query StopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {
     stopsByRadius(lat: $lat, lon: $lon, radius: $radius) {
         edges {
             node {
+                distance
                 stop {
-                    id
                     gtfsId
                     name
                     code
                     zoneId
+                    vehicleType
                     parentStation {
                         name
                     }
                     patterns {
-                        id
                         name
+                        stops {
+                            gtfsId
+                            code
+                            name
+                        }
                     }
-                    vehicleType
                 }
-                distance
             }
         }
     }
