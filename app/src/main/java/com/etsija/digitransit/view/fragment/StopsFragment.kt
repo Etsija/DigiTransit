@@ -29,20 +29,20 @@ class StopsFragment : BaseFragment(), StopInterface {
     private val binding get() = _binding!!
     private val LOCATION_PERMISSION_REQUEST = 2000
     private val controller = StopEpoxyController(this)
-    private var latitude: String = "60.2068726"
-    private var longitude: String = "24.8939462"
+    //private var latitude: String = "60.2068726"
+    //private var longitude: String = "24.8939462"
     private var networkFailure: Boolean = false
 
     // ViewModel for this activity's lifecycle
-    val locationViewModel: LocationViewModel by lazy {
-        ViewModelProvider(this).get(LocationViewModel::class.java)
+    private val locationViewModel: LocationViewModel by lazy {
+        ViewModelProvider(this)[LocationViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentStopsBinding.inflate(inflater, container, false)
         return binding.root
@@ -108,7 +108,7 @@ class StopsFragment : BaseFragment(), StopInterface {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
-            //val (lat, lon) = testLocations(1)
+            //val (lat, lon) = testLocations(5)
             //prefs.lastLat = lat
             //prefs.lastLon = lon
 

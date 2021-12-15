@@ -1,6 +1,5 @@
 package com.etsija.digitransit.view.epoxy
 
-import android.content.res.ColorStateList
 import android.util.Log
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -11,14 +10,12 @@ import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Helpers.Companion.findNextStops
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
-import com.etsija.digitransit.utils.Helpers.Companion.setCardIcon
-import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 
 class StopEpoxyController(
     private val stopInterface: StopInterface
 ): EpoxyController() {
 
-    var isLoading: Boolean = true
+    private var isLoading: Boolean = true
         set(value) {
             field = value
             if (field) {
@@ -101,7 +98,7 @@ class StopEpoxyController(
                 // Set card colour based on type of stop
                 val color = setCardColor(type)
                 tvType.setBackgroundColor(color)
-                root.setStrokeColor(color)
+                root.strokeColor = color
 
                 // Set card symbol
                 when (type) {

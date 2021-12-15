@@ -11,9 +11,9 @@ import com.etsija.digitransit.databinding.ModelAlertEmptyStateBinding
 import com.etsija.digitransit.databinding.ModelLoadingStateBinding
 import com.etsija.digitransit.model.Alert
 
-class AlertEpoxyController(): EpoxyController() {
+class AlertEpoxyController : EpoxyController() {
 
-    var isLoading: Boolean = true
+    private var isLoading: Boolean = true
         set(value) {
             field = value
             if (field) {
@@ -107,7 +107,7 @@ class AlertEpoxyController(): EpoxyController() {
         ViewBindingKotlinModel<ModelLoadingStateBinding>(R.layout.model_loading_state) {
 
         override fun ModelLoadingStateBinding.bind() {
-            // todo
+            // nothing to do
         }
     }
 

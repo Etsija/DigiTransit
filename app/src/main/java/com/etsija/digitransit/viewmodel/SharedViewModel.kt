@@ -11,7 +11,7 @@ import com.etsija.digitransit.repository.SharedRepository
 import com.etsija.digitransit.utils.prefs
 import kotlinx.coroutines.launch
 
-class SharedViewModel(): ViewModel() {
+class SharedViewModel : ViewModel() {
 
     // Repository is declared only here, not in View layer
     private val repository = SharedRepository()

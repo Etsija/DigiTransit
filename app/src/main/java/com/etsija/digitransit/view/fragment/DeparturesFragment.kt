@@ -1,13 +1,11 @@
 package com.etsija.digitransit.view.fragment
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -20,7 +18,6 @@ import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants
 import com.etsija.digitransit.utils.Helpers.Companion.findNextStops
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
-import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.DeparturesEpoxyController
 import kotlinx.coroutines.*
@@ -43,7 +40,7 @@ class DeparturesFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDeparturesBinding.inflate(inflater, container, false)
         return binding.root
@@ -58,7 +55,7 @@ class DeparturesFragment : BaseFragment() {
             // Set card colour based on type of stop
             val color = setCardColor(type)
             binding.tvType.setBackgroundColor(color)
-            binding.mcStopInfo.setStrokeColor(color)
+            binding.mcStopInfo.strokeColor = color
 
             // Set card symbol
             when (type) {

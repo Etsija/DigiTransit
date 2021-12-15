@@ -11,7 +11,7 @@ import com.etsija.digitransit.model.Departure
 
 class DeparturesEpoxyController: EpoxyController() {
 
-    var isLoading: Boolean = true
+    private var isLoading: Boolean = true
         set(value) {
             field = value
             if (field) {
