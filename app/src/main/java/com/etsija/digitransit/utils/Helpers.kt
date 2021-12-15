@@ -108,6 +108,8 @@ class Helpers {
                         if (itr.next()?.gtfsId == thisStopId) {
                             if (itr.hasNext()) {
                                 nextStops.add(itr.next()?.name)
+                            } else {
+                                nextStops.add("Päätepysäkki")
                             }
                         }
                     }
@@ -121,12 +123,11 @@ class Helpers {
                 .distinct()
                 .joinToString(separator = ", ")
 
-            return if (strNextStops != "") {
-                "-> $strNextStops"
-            } else {
-                ""
+            // In case there is no stop after this one, the stop is a terminus, which is returned
+            return when (strNextStops) {
+                "Päätepysäkki" -> strNextStops
+                else -> "-> $strNextStops"
             }
-
         }
 
         // Filter out the stop codes inside (...) from the pattern name
