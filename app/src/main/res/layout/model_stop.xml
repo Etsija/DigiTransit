@@ -14,15 +14,37 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/tvType"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Korppaanmäki" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvParentName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvType"
+            app:layout_constraintTop_toBottomOf="@+id/tvNextStops"
+            tools:text="Elielinaukio" />
+
+        <include
+            android:id="@+id/mStopCode"
+            layout="@layout/model_stopcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvName" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNextStops"
@@ -46,7 +68,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvType"
-            app:layout_constraintTop_toBottomOf="@+id/tvCode"
+            app:layout_constraintTop_toBottomOf="@+id/tvParentName"
             tools:text="34, 45, 56" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -78,7 +100,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvName"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,46 +117,24 @@
             app:layout_constraintTop_toTopOf="@+id/tvType" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toEndOf="@+id/tvType"
-            app:layout_constraintTop_toBottomOf="@+id/tvNextStops"
-            tools:text="H0123" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvParentName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvCode"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvCode"
-            app:layout_constraintTop_toTopOf="@+id/tvCode"
-            tools:text="Elielinaukio" />
-
-        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblZone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:text="Zone:"
-            app:layout_constraintEnd_toStartOf="@+id/tvZone"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvZone" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvZone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="A" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

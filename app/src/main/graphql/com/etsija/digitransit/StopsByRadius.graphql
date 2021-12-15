@@ -14,6 +14,7 @@ query StopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {
                     }
                     patterns {
                         name
+                        directionId
                         stops {
                             gtfsId
                             code

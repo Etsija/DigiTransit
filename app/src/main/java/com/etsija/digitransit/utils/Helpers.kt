@@ -68,6 +68,15 @@ class Helpers {
             }
         }
 
+        // Choose the color of a stop card based on stop type
+        fun setPatternColor(s: String): Int {
+            return when (s) {
+                "OUTBOUND" -> android.R.color.holo_green_dark
+                "INBOUND" -> android.R.color.holo_red_dark
+                else -> Color.GRAY
+            }
+        }
+
         // Return only the list of pattern numbers (via a stop). Note that sorting would
         // need regexp handling, as the order is not correct (321 comes before 37)
         fun getPatternNumbers(patterns: List<Pattern?>?): String? {

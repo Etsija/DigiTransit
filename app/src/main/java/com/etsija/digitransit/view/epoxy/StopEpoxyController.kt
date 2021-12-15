@@ -64,8 +64,14 @@ class StopEpoxyController(
 
         override fun ModelStopBinding.bind() {
             tvName.text = stop.stopName
-            tvCode.text = stop.stopCode ?: stop.gtfsId
-            tvParentName.text = stop.parentName
+            mStopCode.tvCode2.text = stop.stopCode ?: stop.gtfsId
+
+            if (stop.parentName == null) {
+                tvParentName.isGone = true
+            } else {
+                tvParentName.isVisible = true
+                tvParentName.text = stop.parentName
+            }
             tvDistance.text = stop.distance.toString()
 
             if (stop.zoneId == null) {
@@ -98,6 +104,8 @@ class StopEpoxyController(
                 // Set card colour based on type of stop
                 val color = setCardColor(type)
                 tvType.setBackgroundColor(color)
+                mStopCode.tvCode2.setBackgroundColor(color)
+                mStopCode.mcCode.strokeColor = color
                 root.strokeColor = color
 
                 // Set card symbol
