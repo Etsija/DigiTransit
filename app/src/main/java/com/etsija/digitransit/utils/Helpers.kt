@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.ImageView
 import com.etsija.digitransit.R
 import com.etsija.digitransit.model.Pattern
+import com.etsija.digitransit.model.Stop
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable.isActive
 import kotlinx.coroutines.delay
@@ -82,6 +83,52 @@ class Helpers {
             return s.substringBefore(" ")
         }
 
+        //
+        // This method takes in a Stop and finds all possible next stops of it
+        //
+        // It does so by running through lists stop(Stop)->patterns(Pattern)->stops(PatternStop),
+        // matching the current stop in the PatternStop lists and choosing the next stop in each
+        // list (if available).
+        // Because most stops have only one possible next stop, those results are in the end
+        // combined, and the method returns a string containing only the distinct next stops
+        // of this stop.
+        fun findNextStops(stop: Stop): String {
+            val nextStops: ArrayList<String?> = arrayListOf()
+
+            // If there are no patterns through this stop
+            stop.patterns ?: return ""
+
+            val thisStopId = stop.gtfsId
+
+            // Find the next stop name for all patterns through this stop
+            stop.patterns.forEach { pattern ->
+                val itr = pattern?.patternStops?.listIterator()
+                if (itr != null) {
+                    while (itr.hasNext()) {
+                        if (itr.next()?.gtfsId == thisStopId) {
+                            if (itr.hasNext()) {
+                                nextStops.add(itr.next()?.name)
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Sort the list and return only unique list of next stops
+            val strNextStops = nextStops
+                .map { it }
+                .sortedBy { it }
+                .distinct()
+                .joinToString(separator = ", ")
+
+            return if (strNextStops != "") {
+                "-> $strNextStops"
+            } else {
+                ""
+            }
+
+        }
+
         // Filter out the stop codes inside (...) from the pattern name
         fun tidyPatternName(s: String): String {
             return s.replace("\\s*\\([^\\)]*\\)\\s*".toRegex(), " ")
@@ -149,6 +196,5 @@ class Helpers {
 
             return Pair(lat, lon)
         }
-
     }
 }

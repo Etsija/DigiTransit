@@ -27,12 +27,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/tvType"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Korppaanmäki" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNextStops"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvType"
+                app:layout_constraintTop_toBottomOf="@+id/tvStopName"
+                tools:text="-> Haapalahdenkatu" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblPatterns"
@@ -52,7 +65,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:maxLines="7"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -93,7 +106,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvType"
-                app:layout_constraintTop_toBottomOf="@+id/tvStopName"
+                app:layout_constraintTop_toBottomOf="@+id/tvNextStops"
                 tools:text="H0123" />
 
             <androidx.appcompat.widget.AppCompatTextView

@@ -18,6 +18,7 @@ import com.etsija.digitransit.databinding.FragmentDeparturesBinding
 import com.etsija.digitransit.model.Departure
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants
+import com.etsija.digitransit.utils.Helpers.Companion.findNextStops
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
 import com.etsija.digitransit.utils.Helpers.Companion.setCardSymbol
 import com.etsija.digitransit.utils.prefs
@@ -91,6 +92,15 @@ class DeparturesFragment : BaseFragment() {
         binding.tvStopName.text = selectedStop?.stopName
         binding.tvCode.text = selectedStop?.stopCode ?: selectedStop?.gtfsId
 
+        val nextStops = selectedStop?.let { findNextStops(it) }
+
+        if (nextStops == "") {
+            binding.tvNextStops.isGone = true
+        } else {
+            binding.tvNextStops.isVisible = true
+            binding.tvNextStops.text = nextStops
+        }
+
         if (selectedStop?.zoneId == null) {
             binding.lblZone.isGone = true
         } else {
@@ -119,7 +129,7 @@ class DeparturesFragment : BaseFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             var value = 0
             withContext(Dispatchers.IO) {
-                while (true) {
+                while (isActive) {
                     selectedStop?.gtfsId?.let {
                         sharedViewModel.pollDepartures(it)
                     }

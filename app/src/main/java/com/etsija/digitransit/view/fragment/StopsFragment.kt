@@ -57,7 +57,7 @@ class StopsFragment : BaseFragment(), StopInterface {
         viewLifecycleOwner.lifecycleScope.launch {
             var value = 0
             withContext(Dispatchers.IO) {
-                while (true) {
+                while (isActive) {
                     sharedViewModel.pollStops(
                         prefs.lastLat!!.toDouble(),
                         prefs.lastLon!!.toDouble(),

@@ -8,6 +8,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
 import com.etsija.digitransit.model.Stop
+import com.etsija.digitransit.utils.Helpers.Companion.findNextStops
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
 import com.etsija.digitransit.utils.Helpers.Companion.setCardIcon
@@ -84,6 +85,14 @@ class StopEpoxyController(
             } else {
                 tvPatternNumbers.isVisible = true
                 tvPatternNumbers.text = getPatternNumbers((stop.patterns))
+            }
+
+            val nextStops = findNextStops(stop)
+            if (nextStops == "") {
+                tvNextStops.isGone = true
+            } else {
+                tvNextStops.isVisible = true
+                tvNextStops.text = nextStops
             }
 
             // Set card symbol and colour based on type of stop
