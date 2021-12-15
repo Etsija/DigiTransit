@@ -32,6 +32,7 @@ class StopsFragment : BaseFragment(), StopInterface {
     //private var latitude: String = "60.2068726"
     //private var longitude: String = "24.8939462"
     private var networkFailure: Boolean = false
+    private lateinit var job: Job
 
     // ViewModel for this activity's lifecycle
     private val locationViewModel: LocationViewModel by lazy {
@@ -53,22 +54,6 @@ class StopsFragment : BaseFragment(), StopInterface {
         binding.ervStops.setController(controller)
         prepRequestLocationUpdates()
 
-        // Launch a coroutine to poll nearby stops
-        viewLifecycleOwner.lifecycleScope.launch {
-            var value = 0
-            withContext(Dispatchers.IO) {
-                while (isActive) {
-                    sharedViewModel.pollStops(
-                        prefs.lastLat!!.toDouble(),
-                        prefs.lastLon!!.toDouble(),
-                        prefs.searchRadius
-                    )
-                    Log.d(LOG, "lifecycleScope: ${++value}")
-                    delay(prefs.stopsSearchInterval * ONE_SECOND)
-                }
-            }
-        }
-
         // Observe stop data for changes
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
             // Notify user about problems with the network or data
@@ -88,6 +73,37 @@ class StopsFragment : BaseFragment(), StopInterface {
             // After data has changed, scroll to top of list to show nearest stops first
             binding.ervStops.scrollToPosition(0)
         })
+    }
+
+    // When the fragment becomes visible (eg. by returning from another fragment, or by bringing
+    // the app from background to front), launch a coroutine to poll nearby stops
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG, "onStart(): start polling the nearby stops")
+        job = viewLifecycleOwner.lifecycleScope.launch {
+            var value = 0
+            withContext(Dispatchers.IO) {
+                while (isActive) {
+                    sharedViewModel.pollStops(
+                        prefs.lastLat!!.toDouble(),
+                        prefs.lastLon!!.toDouble(),
+                        prefs.searchRadius
+                    )
+                    Log.d(LOG, "lifecycleScope: ${++value}")
+                    delay(prefs.stopsSearchInterval * ONE_SECOND)
+                }
+            }
+        }
+    }
+
+    // When the fragment is no longer visible (eg. by navigating to another fragment, or by
+    // moving the app to background), cancel polling of stops
+    override fun onStop() {
+        super.onStop()
+        Log.d(LOG, "onStop(): stop polling stops")
+        if (job.isActive) {
+            job.cancel()
+        }
     }
 
     // Request permission for the location updates
