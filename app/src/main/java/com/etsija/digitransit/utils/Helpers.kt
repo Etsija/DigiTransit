@@ -148,11 +148,17 @@ class Helpers {
         fun getAddress(context: Context, lat: Double, lon: Double): String? {
             val geoCoder = Geocoder(context, Locale.getDefault())
             val addresses = geoCoder.getFromLocation(lat, lon, 1)
+            var address: String? = ""
 
-            return addresses[0]
-                .getAddressLine(0)
-                .toString()
-                .substringBefore(", ")
+            try {
+                address = addresses[0]
+                    .getAddressLine(0)
+                    .toString()
+                    .substringBefore(", ")
+            } catch (e: Exception) {
+                Log.d("getAddress()", e.toString())
+            }
+            return address
         }
 
         fun testLocations(case: Int): Pair<String, String> {

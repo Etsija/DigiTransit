@@ -1,5 +1,6 @@
 package com.etsija.digitransit.view.fragment
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -53,6 +54,11 @@ class StopsFragment : BaseFragment(), StopInterface {
         super.onViewCreated(view, savedInstanceState)
         binding.ervStops.setController(controller)
         prepRequestLocationUpdates()
+
+        // Observe the address data and update UI
+        locationViewModel.address.observe(viewLifecycleOwner, { address ->
+            binding.tvAddress.text = address
+        })
 
         // Observe stop data for changes
         sharedViewModel.stops.observe(viewLifecycleOwner, { stops ->
@@ -118,12 +124,13 @@ class StopsFragment : BaseFragment(), StopInterface {
         }
     }
 
-    // Get the current location
+    // Observe the current location
     private fun requestLocationUpdates() {
         locationViewModel.getLocationLiveData().observe(viewLifecycleOwner, {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
+            // This is for testing fixed locations (sanity check testing)
             //val (lat, lon) = testLocations(1)
             //prefs.lastLat = lat
             //prefs.lastLon = lon
@@ -131,12 +138,11 @@ class StopsFragment : BaseFragment(), StopInterface {
             binding.tvLat.text = prefs.lastLat
             binding.tvLon.text = prefs.lastLon
 
-            binding.tvAddress.text = context?.let { it1 ->
-                getAddress(
-                    it1,
+            // Get the address of the new location
+            context?.let { context ->
+                locationViewModel.getAddress(context,
                     prefs.lastLat.toString().toDouble(),
-                    prefs.lastLon.toString().toDouble()
-                )
+                    prefs.lastLon.toString().toDouble())
             }
         })
     }

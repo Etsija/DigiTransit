@@ -33,7 +33,6 @@ class LocationLiveData(context: Context): LiveData<LocationDTO>() {
     }
 
     private val locationCallback = object: LocationCallback() {
-
         override fun onLocationResult(locationResult: LocationResult?) {
             super.onLocationResult(locationResult)
 
