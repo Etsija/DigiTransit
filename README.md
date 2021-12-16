@@ -15,9 +15,9 @@ Basically, if you're in a country which implements the DigiTransit API, in the s
 
 ## The Application
 
-In general, the app follows the MVVM architecture (in the picture, Retrofit is replaced by GraphQL).
+In general, the app tries to follow MVVM architecture, although there are some deviances, which I am working on:
 
-![MVVM architecture](readme_resources/final-architecture.png)
+![Overall architecture of the app](readme_resources/Architecture.JPG)
 
 The app locates you (or your mobile, of course) and polls for all public transport stops near you.  The locationing interval (in seconds) and search radius
 (in meters) are set in the Settings tab.  Also the stop polling delay and the departures polling delay (in seconds) can be set by the user.

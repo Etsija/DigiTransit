@@ -3,6 +3,8 @@ package com.etsija.digitransit.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -49,10 +51,17 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Setup bottom navigation bar
-        setupWithNavController(
-            findViewById<BottomNavigationView>(R.id.bottomNavigation),
-            navHostFragment.navController
-        )
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        setupWithNavController(bottomNavigationView, navController)
+
+        // Add our destination change listener to show/hide the bottom nav bar
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
+                bottomNavigationView.isVisible = true
+            } else {
+                bottomNavigationView.isGone = true
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
