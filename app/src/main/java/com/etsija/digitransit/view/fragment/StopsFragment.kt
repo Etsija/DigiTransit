@@ -124,7 +124,7 @@ class StopsFragment : BaseFragment(), StopInterface {
             prefs.lastLat = it.latitude
             prefs.lastLon = it.longitude
 
-            //val (lat, lon) = testLocations(5)
+            //val (lat, lon) = testLocations(1)
             //prefs.lastLat = lat
             //prefs.lastLon = lon
 
