@@ -65,3 +65,12 @@ For each Departure, the following information is shown:
 
 Note that when a departure from this stop is based on an estimate, the corresponding departure card is outlined in yellow. When a realtime estimate exists,
 based on a true current GPS location of the transport vehicle, the departure card in question is outlined in green.
+
+## ToDo
+
+- better network/query error info propagation through the MVVM layers.  Currently the only way of detecting problems in network layer is to detect a NULL response in the UI.
+The app does survive the NULL returning, but currently only notifies the user about them with a very generic Toast message
+- more intelligence to polling of the nearby stops: currently, the polling interval is set by the user (default: 10 seconds) and it is a constant time interval.
+The polling interval should be made dependent on how much the user has moved from his/her last location
+- Android theming: a BIG issue!
+- string constants handling (too many hardcoded strings atm)
