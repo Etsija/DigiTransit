@@ -144,23 +144,6 @@ class Helpers {
             return s.replace("\\s*\\([^\\)]*\\)\\s*".toRegex(), " ")
         }
 
-        // Get address based on location
-        fun getAddress(context: Context, lat: Double, lon: Double): String? {
-            val geoCoder = Geocoder(context, Locale.getDefault())
-            val addresses = geoCoder.getFromLocation(lat, lon, 1)
-            var address: String? = ""
-
-            try {
-                address = addresses[0]
-                    .getAddressLine(0)
-                    .toString()
-                    .substringBefore(", ")
-            } catch (e: Exception) {
-                Log.d("getAddress()", e.toString())
-            }
-            return address
-        }
-
         fun testLocations(case: Int): Pair<String, String> {
             var lat: String = "60.2068726"
             var lon: String = "24.8939462"

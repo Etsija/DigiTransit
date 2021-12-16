@@ -15,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import com.etsija.digitransit.databinding.FragmentStopsBinding
 import com.etsija.digitransit.model.Stop
 import com.etsija.digitransit.utils.Constants.Companion.ONE_SECOND
-import com.etsija.digitransit.utils.Helpers.Companion.getAddress
 import com.etsija.digitransit.utils.Helpers.Companion.testLocations
 import com.etsija.digitransit.utils.prefs
 import com.etsija.digitransit.view.epoxy.StopEpoxyController

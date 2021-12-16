@@ -5,151 +5,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lblLocationing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Locationing"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lblPolling"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Polling"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lblLocInterval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Locationing interval (s)"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/lblLocationing"
-        app:layout_constraintTop_toBottomOf="@+id/lblLocationing" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lblRadius"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Stops search radius (m)"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/lblLocationing"
-        app:layout_constraintTop_toBottomOf="@+id/lblPolling" />
-
-    <View
-        android:id="@+id/divider"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfLocInterval"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="?android:attr/listDivider"
+        android:hint="Locationing interval (min. 5 s)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLocInterval" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_baseline_timelapse_24">
 
-    <EditText
-        android:id="@+id/etLocInterval"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLocInterval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfRadius"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginStart="8dp"
-        android:ems="3"
-        android:inputType="number"
-        android:text="10"
-        android:textAlignment="center"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lblLocInterval"
-        app:layout_constraintStart_toEndOf="@+id/lblLocInterval"
-        app:layout_constraintTop_toTopOf="@+id/lblLocInterval" />
+        android:layout_marginEnd="8dp"
+        android:hint="Stops search radius (min. 1 m)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfLocInterval"
+        app:startIconDrawable="@drawable/ic_baseline_radar_24">
 
-    <EditText
-        android:id="@+id/etRadius"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRadius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfStopsInterval"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginStart="8dp"
-        android:ems="3"
-        android:inputType="number"
-        android:text="250"
-        android:textAlignment="center"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lblRadius"
-        app:layout_constraintStart_toEndOf="@+id/lblRadius"
-        app:layout_constraintTop_toTopOf="@+id/lblRadius" />
+        android:layout_marginEnd="8dp"
+        android:hint="Stops search interval (min. 10 s)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfRadius"
+        app:startIconDrawable="@drawable/ic_baseline_timelapse_24">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lblStopsInterval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Stops search interval (s)"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/lblPolling"
-        app:layout_constraintTop_toBottomOf="@+id/etRadius" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etStopsInterval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/etStopsInterval"
-        android:layout_width="wrap_content"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfArrivalInterval"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginStart="8dp"
-        android:ems="3"
-        android:inputType="number"
-        android:text="10"
-        android:textAlignment="center"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lblStopsInterval"
-        app:layout_constraintStart_toEndOf="@+id/lblStopsInterval"
-        app:layout_constraintTop_toTopOf="@+id/lblStopsInterval" />
+        android:layout_marginEnd="8dp"
+        android:hint="Arrivals search interval (min. 10 s)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfStopsInterval"
+        app:startIconDrawable="@drawable/ic_baseline_timelapse_24">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lblArrivalInterval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Next arrivals search interval (s)"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/lblPolling"
-        app:layout_constraintTop_toBottomOf="@+id/etStopsInterval" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etArrivalInterval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/etArrivalInterval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ems="3"
-        android:inputType="number"
-        android:text="10"
-        android:textAlignment="center"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lblArrivalInterval"
-        app:layout_constraintStart_toEndOf="@+id/lblArrivalInterval"
-        app:layout_constraintTop_toTopOf="@+id/lblArrivalInterval" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSavePreferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etArrivalInterval" />
+        app:layout_constraintTop_toBottomOf="@+id/tfArrivalInterval" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
