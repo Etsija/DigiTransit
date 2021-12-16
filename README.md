@@ -32,7 +32,7 @@ Usually, these feeds refer to particular towns in the area of the country's publ
 
 ![Traffic alerts](readme_resources/AlertsFragment.jpg)
 
-Currently, the feeds in Finland seem to be HSL (Helsinki public transport), OULU (Oulu public transport) and tampere (Tampere public transport), but the app
+Currently, the feeds in Finland seem to be _HSL_ (Helsinki public transport), _OULU_ (Oulu public transport) and _tampere_ (Tampere public transport), but the app
 shows any and all additional alerts that might subscribe to the alert system in future.
 
 ## Stops view
@@ -41,13 +41,15 @@ shows any and all additional alerts that might subscribe to the alert system in 
 
 The StopsFragment shows for all nearby stops the following information:
 - stop name
-- stop code (in Helsinki area, the code that's printed on the stop sign)
+- name of the parent station, if such exists (for example, _Elielinaukio_)
+- stop code (in Helsinki area, the code that's printed on the stop sign), colour coded based on the stop type
 - zone (related to the fare policy of a trip on some parts of Finland public transport)
 - patterns that use this stop
+- all possible next stops for all patterns that go via this stop, marked with "->"
 - distance (in meters) to the stop
 
 Stop card symbol and colour are chosen based on whether the Stop is recognized as being a bus, tram, metro, train etc. stop. In Helsinki (HSL) area, this is very
-thoroughly implemented. In other areas, the Stop card is shown as gray, indicating that the Stop has not implemented the Type property yet.
+thoroughly implemented. In other areas, the Stop card is shown as gray, indicating that the type property of the stop has not been implemented yet in the API.
 
 ## Departures view
 
@@ -61,4 +63,5 @@ For each Departure, the following information is shown:
 - time until departure. When preceded with a "~", the time is an estimate, based on fixed timetables
 - headsign of the transportation vehicle departing from the Stop
 
-Note that when the departure from this stop is based on an estimate, the corresponding item is shown in yellow. With realtime estimate it is shown in green.
+Note that when a departure from this stop is based on an estimate, the corresponding departure card is outlined in yellow. When a realtime estimate exists,
+based on a true current GPS location of the transport vehicle, the departure card in question is outlined in green.
