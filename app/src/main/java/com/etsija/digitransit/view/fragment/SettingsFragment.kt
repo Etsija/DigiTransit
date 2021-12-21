@@ -60,16 +60,16 @@ class SettingsFragment : Fragment() {
         val arrivalsInterval = binding.etArrivalInterval
 
         if (locInterval.text.toString().toInt() < 5) {
-            locInterval.error = "* Minimum is 5"
+            binding.tfLocInterval.error = "* Minimum is 5"
             retValue = false
         } else if (radius.text.toString().toInt() < 1) {
-            radius.error = "* Mininum is 1"
+            binding.tfRadius.error = "* Mininum is 1"
             retValue = false
         } else if (stopsInterval.text.toString().toInt() < 10) {
-            stopsInterval.error = "* Minimum is 10"
+            binding.tfStopsInterval.error = "* Minimum is 10"
             retValue = false
         } else if (arrivalsInterval.text.toString().toDouble() < 10) {
-            arrivalsInterval.error = "* Minimum is 10"
+            binding.tfArrivalInterval.error = "* Minimum is 10"
             retValue = false
         } else {
             retValue = true

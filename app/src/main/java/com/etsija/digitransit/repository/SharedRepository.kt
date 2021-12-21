@@ -33,6 +33,22 @@ class SharedRepository {
         return null
     }
 
+    suspend fun getStops2(lat: Double, lon: Double, radius: Int): List<Stop>? {
+        val response = ApolloClient.getStops(lat, lon, radius)
+        val stops = mutableListOf<Stop>()
+
+        if (response.failed || !response.isSuccessful) {
+            return null
+        }
+
+        for (stop in response.body.stopsByRadius?.edges!!) {
+            if (stop != null) {
+                stops.add(StopMapper.buildFrom(stop.node!!))
+            }
+        }
+        return stops
+    }
+
     suspend fun getDepartures(gtfsId: String): List<Departure>? {
         val response = ApolloClient.getDeparturesSafely(gtfsId)?.data
         val departures = mutableListOf<Departure>()

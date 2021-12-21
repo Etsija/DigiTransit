@@ -74,3 +74,5 @@ The app does survive the NULL returning, but currently only notifies the user ab
 The polling interval should be made dependent on how much the user has moved from his/her last location
 - Android theming: a BIG issue!
 - string constants handling (too many hardcoded strings atm)
+- better handling of the patterns through this stop (maybe using Epoxy for this as well?)
+- indicating of the outbound and inbound patterns/stops (colour coding?)

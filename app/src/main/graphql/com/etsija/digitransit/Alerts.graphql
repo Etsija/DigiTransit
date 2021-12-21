@@ -6,6 +6,11 @@ query Alerts {
         alertSeverityLevel
         effectiveStartDate
         effectiveEndDate
+        route {
+            gtfsId
+            shortName
+            longName
+        }
         stop {
             gtfsId
             code

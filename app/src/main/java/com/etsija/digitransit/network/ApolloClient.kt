@@ -90,12 +90,23 @@ object ApolloClient {
         return response
     }
 
-    fun getStops(lat: Double, lon: Double, radius: Int): ApolloQueryCall<StopsByRadiusQuery.Data> =
-        apollo.query(StopsByRadiusQuery(lat, lon, radius))
+    suspend fun getStops(lat: Double, lon: Double, radius: Int): DigiTransitResponse<StopsByRadiusQuery.Data> {
+        return safeApiCall { apollo.query(StopsByRadiusQuery(lat, lon, radius)).await() }
+    }
 
-    fun getDepartures(gtfsId: String): ApolloQueryCall<StopArrDepQuery.Data> =
-        apollo.query(StopArrDepQuery(gtfsId))
+    suspend fun getDepartures(gtfsId: String): DigiTransitResponse<StopArrDepQuery.Data> {
+        return safeApiCall { apollo.query(StopArrDepQuery(gtfsId)).await() }
+    }
 
-    fun getAlerts(): ApolloQueryCall<AlertsQuery.Data> =
-        apollo.query(AlertsQuery())
+    suspend fun getAlerts(): DigiTransitResponse<AlertsQuery.Data> {
+        return safeApiCall { apollo.query(AlertsQuery()).await() }
+    }
+
+    private inline fun <T> safeApiCall(apiCall: () -> Response<T>): DigiTransitResponse<T> {
+        return try {
+            DigiTransitResponse.success(apiCall.invoke())
+        } catch (e: Exception) {
+            DigiTransitResponse.failure(e)
+        }
+    }
 }

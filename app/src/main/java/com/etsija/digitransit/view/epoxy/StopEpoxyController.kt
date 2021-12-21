@@ -101,12 +101,18 @@ class StopEpoxyController(
             // Set card symbol and colour based on type of stop
             stop.type?.let { type ->
 
-                // Set card colour based on type of stop
+                // Set card and stop code colors based on type of stop
+
+                // Card color
                 val color = setCardColor(type)
                 tvType.setBackgroundColor(color)
-                mStopCode.tvCode2.setBackgroundColor(color)
-                mStopCode.mcCode.strokeColor = color
                 root.strokeColor = color
+
+                // Stop code color
+                //mStopCode.tvCode2.setBackgroundColor(color)
+                mStopCode.mcCode.strokeColor = color
+                mStopCode.root.setCardBackgroundColor(color)
+                //mStopCode.root.strokeColor = color
 
                 // Set card symbol
                 when (type) {

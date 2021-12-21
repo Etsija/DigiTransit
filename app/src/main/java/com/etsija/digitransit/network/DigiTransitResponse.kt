@@ -2,8 +2,11 @@ package com.etsija.digitransit.network
 
 
 import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.exception.ApolloException
 import java.lang.Exception
 
+// This class wraps the Response from DigiTransit API into a class that holds both the data
+// (in case of success) and the exception (in case of network call failure).
 class DigiTransitResponse<T>(
     val status: Status,
     val data: Response<T>?,
@@ -40,6 +43,5 @@ class DigiTransitResponse<T>(
         get() = !failed && this.data?.hasErrors() == false
 
     val body: T
-        //get() = this.body!!
         get() = this.data!!.data!!
 }
