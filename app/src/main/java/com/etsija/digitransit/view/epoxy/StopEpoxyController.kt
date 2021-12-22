@@ -1,5 +1,7 @@
 package com.etsija.digitransit.view.epoxy
 
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.util.Log
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -7,9 +9,14 @@ import com.airbnb.epoxy.EpoxyController
 import com.etsija.digitransit.R
 import com.etsija.digitransit.databinding.*
 import com.etsija.digitransit.model.Stop
+import com.etsija.digitransit.utils.Helpers.Companion.colorToHex
 import com.etsija.digitransit.utils.Helpers.Companion.findNextStops
 import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbers
+import com.etsija.digitransit.utils.Helpers.Companion.getPatternNumbersColored
 import com.etsija.digitransit.utils.Helpers.Companion.setCardColor
+import com.etsija.digitransit.utils.Helpers.Companion.setPatternColor
+import java.lang.Integer.toHexString
+import java.security.AccessController.getContext
 
 class StopEpoxyController(
     private val stopInterface: StopInterface
@@ -87,7 +94,9 @@ class StopEpoxyController(
                 tvPatternNumbers.isGone = true
             } else {
                 tvPatternNumbers.isVisible = true
-                tvPatternNumbers.text = getPatternNumbers((stop.patterns))
+                //tvPatternNumbers.text = getPatternNumbers(stop.patterns)
+                tvPatternNumbers.text = Html
+                    .fromHtml(getPatternNumbersColored(stop.patterns), FROM_HTML_MODE_LEGACY)
             }
 
             val nextStops = findNextStops(stop)
@@ -108,8 +117,11 @@ class StopEpoxyController(
                 tvType.setBackgroundColor(color)
                 root.strokeColor = color
 
+                //Log.d("setPatternColor()", colorToHex(setPatternColor("INBOUND")))
+                //tvPatternNumbers.text = Html.fromHtml("xxx", FROM_HTML_MODE_LEGACY)
+
+
                 // Stop code color
-                //mStopCode.tvCode2.setBackgroundColor(color)
                 mStopCode.mcCode.strokeColor = color
                 mStopCode.root.setCardBackgroundColor(color)
                 //mStopCode.root.strokeColor = color

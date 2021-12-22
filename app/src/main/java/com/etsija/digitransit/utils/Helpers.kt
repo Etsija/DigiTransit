@@ -1,16 +1,22 @@
 package com.etsija.digitransit.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.location.Geocoder
 import android.util.Log
 import android.widget.ImageView
+import androidx.core.app.NotificationCompat.getColor
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.etsija.digitransit.R
 import com.etsija.digitransit.model.Pattern
 import com.etsija.digitransit.model.Stop
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable.isActive
 import kotlinx.coroutines.delay
+import java.lang.Integer.toHexString
+import java.security.AccessController.getContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -58,23 +64,28 @@ class Helpers {
         }
 
         // Choose the color of a stop card based on stop type
-        fun setCardColor(s: String): Int {
-            return when (s) {
-                "TRAM" -> Color.parseColor("#008351")   // RAL 6024 Traffic Green, HKL Raitiovaunu
-                "METRO" -> Color.parseColor("#F67828")  // RAL 2003 Pastel Orange, HKL Metro
-                "RAIL" -> Color.parseColor("#844C82")   // RAL 4008 Signal Violet, HSL Lähijuna
-                "BUS" -> Color.parseColor("#2271B3")    // RAL 5015 Sky Blue, HSL Bussi
-                else -> Color.GRAY  // Stops outside HSL area and not identified with type
+        fun setCardColor(type: String): Int {
+            return when (type) {
+                "TRAM" -> ResourcesCompat.getColor(App.res, R.color.HKL_raitiovaunu, null)
+                "METRO" -> ResourcesCompat.getColor(App.res, R.color.HKL_metro, null)
+                "RAIL" -> ResourcesCompat.getColor(App.res, R.color.HKL_lahijuna, null)
+                "BUS" -> ResourcesCompat.getColor(App.res, R.color.HKL_bussi, null)
+                else -> Color.GRAY  // Stops with unknown type
             }
         }
 
-        // Choose the color of a stop card based on stop type
+        // Set the pattern color depending on inbound/outbound pattern
         fun setPatternColor(s: String): Int {
             return when (s) {
-                "OUTBOUND" -> android.R.color.holo_green_dark
-                "INBOUND" -> android.R.color.holo_red_dark
-                else -> Color.GRAY
+                "OUTBOUND" -> ResourcesCompat.getColor(App.res, android.R.color.holo_green_light, null)
+                "INBOUND" -> ResourcesCompat.getColor(App.res, android.R.color.holo_red_light, null)
+                else -> Color.WHITE
             }
+        }
+
+        // Convert color value from Int to String
+        fun colorToHex(c: Int): String {
+            return "#" + toHexString(c and 0xffffff)
         }
 
         // Return only the list of pattern numbers (via a stop). Note that sorting would
@@ -86,6 +97,37 @@ class Helpers {
                 }?.sorted()?.distinct()?.joinToString(separator = ", ")
             return retString
         }
+
+        // This method takes in the pattern number list
+        // and creates a colored list based on whether the pattern is INBOUND, OUTBOUND
+        // or UNDEFINED. The method returns the colored list as an HTML string.
+        //
+        // Usage in TextView: tvMyTextView.text = Html.fromHtml(text, FROM_HTML_MODE_LEGACY
+        fun getPatternNumbersColored(patterns: List<Pattern?>?): String? {
+            val pairList = arrayListOf<Pair<String, String?>>()
+            val outList: List<Pair<String, String?>>
+            var retString: String? = ""
+
+            // Construct a list of pairs (pattern number, direction)
+            patterns?.map { pattern ->
+                pairList.add(Pair(getPatternNumber(pattern!!.name), pattern.direction))
+            }
+            outList = pairList.sortedWith(compareBy { it.first }).distinct()
+
+            // Create the HTML and colour each element according to whether the pattern
+            // is set to INBOUND or OUTBOUND route
+            for (l in outList) {
+                retString +=
+                    "<font color=" +
+                    l.second?.let { colorToHex(setPatternColor(it)) } +
+                    ">" +
+                    l.first +
+                    " " +
+                    "</font>"
+            }
+            return (retString)
+        }
+
 
         // Extract only the pattern number from a longer name of the pattern
         fun getPatternNumber(s: String): String {
